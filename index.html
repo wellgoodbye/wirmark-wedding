@@ -1,351 +1,344 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>complete responsive wedding planner website create by Win Coder</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wedding — Refined & Spacious (Manrope + Playfair)</title>
+  <meta name="description" content="Refined, extra‑spacious wedding page with a medium dark wine‑red accent and elegant typography." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff; --surface:#ffffff; --text:#141418; --muted:#5f6069; --line:#e7e8ee;
+      --accent:#9A1B3F; --accent-ink:#7C1532; /* medium dark wine red */
+      --radius:18px; --shadow:0 14px 30px rgba(20,14,18,.06);
+      --maxw:1180px; /* wider canvas for more air */
+      --section-space: 56px; /* vertical spacing between sections */
+      --card-pad-y: 34px; --card-pad-x: 30px; /* larger card padding */
+      --grid-gap: 26px; /* larger grid gap */
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#101014; --surface:#14161a; --text:#f4f4f8; --muted:#b5b6c0; --line:#262832; --shadow:none }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; background:var(--bg); color:var(--text); font-family:Manrope, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans"; line-height:1.75}
+    a{color:var(--accent); text-decoration:none}
 
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:42px 34px}
 
-    <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    /* NAV with more breathing room */
+    .nav{position:sticky; top:0; z-index:30; backdrop-filter:blur(10px); background: color-mix(in srgb, var(--bg) 86%, transparent); border-bottom:1px solid var(--line)}
+    .nav .inner{max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; gap:18px; padding:18px 28px}
+    .brand{font-family:"Playfair Display", serif; font-weight:700; font-size:1.35rem; letter-spacing:.01em}
+    .navlinks{margin-left:auto; display:flex; gap:14px; flex-wrap:wrap}
+    .chip{padding:12px 16px; border:1px solid var(--line); border-radius:999px; font-weight:800; font-size:1rem; color:var(--text); transition:border-color .2s, color .2s}
+    .chip:hover,.chip.active{border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color:var(--accent-ink)}
 
+    /* HERO — generous spacing */
+    .hero{margin-top:28px; border:1px solid var(--line); border-radius:var(--radius); padding:48px 42px; background:var(--surface); box-shadow:var(--shadow)}
+    .hero-grid{display:grid; grid-template-columns: 1.25fr .75fr; gap:34px}
+    @media (max-width:1000px){.hero-grid{grid-template-columns:1fr}}
+    h1.title{margin:0 0 14px; font-family:"Playfair Display", serif; font-size:clamp(42px,5.8vw,72px); line-height:1.08; font-weight:700}
+    .title .em{color:var(--accent)}
+    .subtitle{color:var(--muted); font-size:1.1rem}
+    .countdown{display:flex; gap:16px; flex-wrap:wrap; margin-top:20px}
+    .tile{min-width:108px; text-align:center; border:1px solid var(--line); border-radius:14px; padding:14px 12px; background:var(--surface)}
+    .num{font-size:1.5rem; font-weight:900}
+    .lab{font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em}
+    .hero-media{position:relative; border:1px solid var(--line); border-radius:16px; overflow:hidden}
+    .hero-media .ph{display:grid; place-items:center; aspect-ratio:16/10; color:#a29aa1; font-style:italic}
+
+    /* SECTION BASE */
+    section{margin-top:var(--section-space)}
+    .card{border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); box-shadow:var(--shadow)}
+    .inner{padding:var(--card-pad-y) var(--card-pad-x)}
+    .section-title{display:flex; align-items:center; gap:14px; margin:0 0 14px; font-size:1.34rem; font-weight:900; letter-spacing:.01em}
+    .dot{width:11px; height:11px; border-radius:50%; background:var(--accent)}
+    .lead{color:var(--muted); font-size:1.06rem}
+
+    /* LAYOUTS with bigger gaps */
+    .info2{display:grid; grid-template-columns: 1.1fr .9fr; gap:var(--grid-gap)}
+    @media (max-width:1000px){.info2{grid-template-columns:1fr}}
+    .imgbox{border:1px solid var(--line); border-radius:14px; overflow:hidden}
+    .imgbox img{width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:16/10}
+
+    .grid{display:grid; gap:var(--grid-gap)}
+    .cols-2{grid-template-columns:1fr 1fr}
+    @media (max-width:1000px){.cols-2{grid-template-columns:1fr}}
+    .kv-card{border:1px dashed var(--line); border-radius:14px; padding:18px}
+    .kv-card h3{margin:0 0 8px; font-size:1.1rem; font-weight:900}
+    .kv-card p{margin:0; color:var(--muted)}
+
+    .person{display:grid; grid-template-columns:72px 1fr; gap:16px; align-items:center; border:1px solid var(--line); border-radius:14px; padding:16px}
+    .avatar{width:72px; height:72px; border-radius:50%; overflow:hidden; border:1px solid var(--line)}
+    .avatar img{width:100%; height:100%; object-fit:cover}
+    .role{color:var(--muted); font-size:1rem}
+
+    /* FORMS with more rhythm */
+    form{display:grid; gap:14px}
+    .row-2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .row-3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
+    @media (max-width:900px){.row-2,.row-3{grid-template-columns:1fr}}
+    input,select,textarea{width:100%; padding:14px 16px; border-radius:14px; border:1px solid var(--line); background:var(--surface); color:var(--text); font:inherit}
+    textarea{min-height:132px}
+    .btn{padding:12px 16px; border-radius:14px; border:1px solid var(--line); font-weight:900; font-size:1rem; color:var(--accent-ink); background:transparent}
+    .btn.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
+
+    /* GALLERY */
+    .uploader{border:1px dashed var(--line); border-radius:14px; padding:22px; text-align:center; color:var(--muted)}
+    .gallery{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:14px}
+    @media (max-width:1000px){.gallery{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.gallery{grid-template-columns:1fr}}
+    .gallery figure{margin:0; border:1px solid var(--line); border-radius:14px; overflow:hidden}
+    .gallery img{width:100%; height:240px; object-fit:cover; display:block}
+
+    /* DIVIDERS between sections to create more separation */
+    .divider{height:1px; background:var(--line); margin: var(--section-space) 0}
+
+    /* REVEAL */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .45s ease, transform .45s ease}
+    .reveal.visible{opacity:1; transform:none}
+
+    footer{color:var(--muted); text-align:center; padding:26px 6px; border-top:1px solid var(--line); margin-top:calc(var(--section-space) + 10px)}
+  </style>
 </head>
 <body>
-    
-<!-- header section starts  -->
-
-<header>
-
-    <a href="#" class="logo">WCwedding</a>
-
-    <div id="menu-bar" class="fas fa-bars"></div>
-
-    <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#vendor">vendor</a>
-        <a href="#clients">clients</a>
-        <a href="#team">team</a>
-        <a href="#blog">blog</a>
-        <a href="#contact">contact</a>
-        
-    </nav>
-
-</header>
-
-<!-- header section ends -->
-
-<!-- home section starts  -->
-
-<section class="home" id="home">
-
-    <div class="content">
-        <span>wedding planner agency</span>
-        <h3>we make every moment special!</h3>
-        <a href="#" class="btn">learm more</a>
+  <nav class="nav">
+    <div class="inner">
+      <div class="brand">Wedding</div>
+      <div class="navlinks">
+        <a class="chip" href="#ceremony">Ceremony</a>
+        <a class="chip" href="#dinner">Dinner</a>
+        <a class="chip" href="#details">Good to know</a>
+        <a class="chip" href="#party">Wedding party</a>
+        <a class="chip" href="#gifts">Gifts</a>
+        <a class="chip" href="#speeches">Speeches</a>
+        <a class="chip" href="#rsvp">RSVP</a>
+        <a class="chip" href="#photos">Photos</a>
+      </div>
     </div>
+  </nav>
 
-</section>
-
-<!-- home section ends -->
-
-<section class="step-container">
-
-    <div class="step">
-        <span>01</span>
-        <h3>engagement</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum porro iure esse laudantium aspernatur, veniam sunt provident eius cum ab.</p>
-        <a href="#" class="btn">learm more</a>
-    </div>
-
-    <div class="step">
-        <span>02</span>
-        <h3>save the date</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum porro iure esse laudantium aspernatur, veniam sunt provident eius cum ab.</p>
-        <a href="#" class="btn">learm more</a>
-    </div>
-
-    <div class="step">
-        <span>03</span>
-        <h3>wedding ceremony</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum porro iure esse laudantium aspernatur, veniam sunt provident eius cum ab.</p>
-        <a href="#" class="btn">learm more</a>
-    </div>
-
-</section>
-
-<!-- vendor section starts  -->
-
-<section class="vendor" id="vendor">
-
-    <div class="heading">
-        <h1>top wedding vendors</h1>
-        <img src="images/header-img.png" alt="">
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <img src="images/img1.jpg" alt="">
-            <div class="info">
-                <h3>dressing</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolores.</p>
-                <a href="#" class="btn">learm more</a>
-            </div>
+  <div class="wrap">
+    <header class="hero reveal">
+      <div class="hero-grid">
+        <div>
+          <h1 class="title"><span class="em">Name & Name</span> are getting married</h1>
+          <p class="subtitle">City/Venue — <span id="hero-date">May 9, 2026</span></p>
+          <div class="countdown" id="countdown" aria-live="polite"></div>
         </div>
-
-        <div class="box">
-            <img src="images/img2.jpg" alt="">
-            <div class="info">
-                <h3>Florist</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolores.</p>
-                <a href="#" class="btn">learm more</a>
-            </div>
+        <div class="hero-media">
+          <div class="ph">
+            <span>Hero image — drop your photo here</span>
+            <img src="" alt="Hero / engagement photo" />
+          </div>
         </div>
+      </div>
+    </header>
 
-        <div class="box">
-            <img src="images/img3.jpg" alt="">
-            <div class="info">
-                <h3>wedding cake</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolores.</p>
-                <a href="#" class="btn">learm more</a>
-            </div>
+    <section id="ceremony" class="card reveal">
+      <div class="inner info2">
+        <div>
+          <h2 class="section-title"><span class="dot"></span> Ceremony</h2>
+          <p class="lead"><strong>3:00 PM</strong> — Ceremony at <strong>Ceremony venue</strong>. Seating from 2:30 PM. Unplugged ceremony, please.</p>
+          <p>Address: <em>Street 1, ZIP City</em> · <a href="#" target="_blank" rel="noopener">Open map</a></p>
         </div>
+        <figure class="imgbox">
+          <img src="" alt="Ceremony location — replace with your image" />
+        </figure>
+      </div>
+    </section>
 
-        <div class="box">
-            <img src="images/img4.jpg" alt="">
-            <div class="info">
-                <h3>venu and hall</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolores.</p>
-                <a href="#" class="btn">learm more</a>
-            </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <section id="dinner" class="card reveal">
+      <div class="inner info2">
+        <div>
+          <h2 class="section-title"><span class="dot"></span> Dinner & Party</h2>
+          <p class="lead">Arrival to <strong>Reception venue</strong> around <strong>4:00 PM</strong>. Three‑course dinner followed by dancing.</p>
+          <p>Address: <em>Street 2, ZIP City</em> · <a href="#" target="_blank" rel="noopener">Open map</a></p>
         </div>
+        <figure class="imgbox">
+          <img src="" alt="Reception venue — replace with your image" />
+        </figure>
+      </div>
+    </section>
 
-        <div class="box">
-            <img src="images/img5.jpg" alt="">
-            <div class="info">
-                <h3>music and party</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolores.</p>
-                <a href="#" class="btn">learm more</a>
-            </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <section id="details" class="card reveal">
+      <div class="inner">
+        <h2 class="section-title"><span class="dot"></span> Good to know</h2>
+        <div class="grid cols-2">
+          <div class="kv-card"><h3>Food & drinks</h3><p>Starter, main and wedding cake. Drinks during dinner, bar afterwards.</p></div>
+          <div class="kv-card"><h3>Accommodation</h3><p>Main hotel near the reception. More options below.</p></div>
+          <div class="kv-card"><h3>Dress code</h3><p>Lounge suit or equivalent.</p></div>
+          <div class="kv-card"><h3>Kids</h3><p>Adults only celebration (babies welcome).</p></div>
         </div>
+      </div>
+    </section>
 
-        <div class="box">
-            <img src="images/img6.jpg" alt="">
-            <div class="info">
-                <h3>photographer</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolores.</p>
-                <a href="#" class="btn">learm more</a>
-            </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <section id="party" class="card reveal">
+      <div class="inner">
+        <h2 class="section-title"><span class="dot"></span> Wedding party & hosts</h2>
+        <div class="grid cols-2">
+          <div class="person"><div class="avatar"><img src="" alt="Best man" /></div><div><div style="font-weight:900">Name</div><div class="role">Best man</div></div></div>
+          <div class="person"><div class="avatar"><img src="" alt="Maid of honor" /></div><div><div style="font-weight:900">Name</div><div class="role">Maid of honor</div></div></div>
+          <div class="person"><div class="avatar"><img src="" alt="Toast host" /></div><div><div style="font-weight:900">Name</div><div class="role">Toast host · 📞 +46 70‑000 00 00 · ✉️ name@example.com</div></div></div>
+          <div class="person"><div class="avatar"><img src="" alt="Toast host" /></div><div><div style="font-weight:900">Name</div><div class="role">Toast host · 📞 +46 70‑000 00 00 · ✉️ name@example.com</div></div></div>
         </div>
+      </div>
+    </section>
 
-    </div>
+    <div class="divider" aria-hidden="true"></div>
 
-</section>
+    <section id="gifts" class="card reveal">
+      <div class="inner">
+        <h2 class="section-title"><span class="dot"></span> Gifts</h2>
+        <p class="lead">Your presence is all we wish for. If you still want to give a gift, here’s our wishlist (demo reservation stored locally).</p>
+        <div id="wish" class="grid cols-2"></div>
+        <button class="btn" type="button" onclick="addWish()">Add example gift</button>
+      </div>
+    </section>
 
-<!-- vendor section ends -->
+    <div class="divider" aria-hidden="true"></div>
 
-<!-- client section starts  -->
+    <section id="speeches" class="card reveal">
+      <div class="inner">
+        <h2 class="section-title"><span class="dot"></span> Speeches</h2>
+        <p class="lead">Planning a speech/performance? Use the form below. (Demo only — we can connect to Microsoft Forms/Google Forms.)</p>
+        <form aria-label="Speech signup">
+          <div class="row-2">
+            <input type="text" placeholder="Your name" required>
+            <input type="email" placeholder="Email" required>
+          </div>
+          <div class="row-3">
+            <select required>
+              <option value="" disabled selected>Type of act</option>
+              <option>Speech</option>
+              <option>Performance</option>
+              <option>Surprise</option>
+            </select>
+            <input type="text" placeholder="Approx. length (min)">
+            <input type="text" placeholder="Tech needs (e.g. music)">
+          </div>
+          <textarea placeholder="Description"></textarea>
+          <button class="btn primary" type="button" onclick="alert('Demo — connect to your preferred service on publish')">Send signup</button>
+        </form>
+      </div>
+    </section>
 
-<section class="clients" id="clients">
+    <div class="divider" aria-hidden="true"></div>
 
-    <div class="heading">
-        <h1>our previous clients</h1>
-        <img src="images/header-img.png" alt="">
-    </div>
+    <section id="rsvp" class="card reveal">
+      <div class="inner">
+        <h2 class="section-title"><span class="dot"></span> RSVP</h2>
+        <p class="lead">Please RSVP by <strong>April 10</strong>. (Demo confirmation only.)</p>
+        <form aria-label="RSVP form">
+          <div class="row-2">
+            <input type="text" placeholder="Full name" required>
+            <input type="email" placeholder="Email" required>
+          </div>
+          <div class="row-3">
+            <select required>
+              <option value="" disabled selected>Will you attend?</option>
+              <option>Gladly accept</option>
+              <option>Regretfully decline</option>
+            </select>
+            <input type="number" min="1" max="10" placeholder="# of guests">
+            <input type="text" placeholder="Allergies / dietary preferences">
+          </div>
+          <textarea placeholder="Message (optional)"></textarea>
+          <button class="btn primary" type="button" onclick="alert('Thank you! (demo)')">Send RSVP</button>
+        </form>
+      </div>
+    </section>
 
-    <div class="row">
+    <div class="divider" aria-hidden="true"></div>
 
-        <div class="box-container">
-            <div class="box">
-                <img src="images/client-1.jpg" alt="">
-                <div class="info">
-                    <h3>01. shakib & shishir</h3>
-                    <p> <i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet illo aut repudiandae nihil quidem perspiciatis natus placeat, inventore, vitae, quia totam ad dolores velit. Cumque, alias ullam. Nihil, aperiam hic! <i class="fas fa-quote-right"></i> </p>
-                </div>
-            </div>
-            <div class="box">
-                <img src="images/client-2.jpg" alt="">
-                <div class="info">
-                    <h3>02. nasir & tamima</h3>
-                    <p> <i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet illo aut repudiandae nihil quidem perspiciatis natus placeat, inventore, vitae, quia totam ad dolores velit. Cumque, alias ullam. Nihil, aperiam hic! <i class="fas fa-quote-right"></i> </p>
-                </div>
-            </div>
+    <section id="photos" class="card reveal">
+      <div class="inner">
+        <h2 class="section-title"><span class="dot"></span> Photos</h2>
+        <div class="uploader" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+          Upload your favorite photos here after the wedding (drag & drop or choose files). In this demo, images are previewed locally only.
+          <div style="margin-top:14px"><input type="file" multiple accept="image/*" onchange="previewFiles(this.files)"></div>
         </div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </section>
 
-        <img src="images/divider.png" class="divider" alt="">
+    <footer class="reveal">Extra‑spacious, refined design with a medium dark wine‑red accent — ready to customize. ©</footer>
+  </div>
 
-        <div class="box-container">
-            <div class="box">
-                <div class="info">
-                    <h3>03. tamim & ayesha</h3>
-                    <p> <i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet illo aut repudiandae nihil quidem perspiciatis natus placeat, inventore, vitae, quia totam ad dolores velit. Cumque, alias ullam. Nihil, aperiam hic! <i class="fas fa-quote-right"></i> </p>
-                </div>
-                <img src="images/client-3.jpg" alt="">
-            </div>
-            <div class="box">
-                <div class="info">
-                    <h3>04. mushfiqur & Jannatul Mondi</h3>
-                    <p> <i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet illo aut repudiandae nihil quidem perspiciatis natus placeat, inventore, vitae, quia totam ad dolores velit. Cumque, alias ullam. Nihil, aperiam hic! <i class="fas fa-quote-right"></i> </p>
-                </div>
-                <img src="images/client-4.jpg" alt="">
-            </div>
-        </div>
+  <script>
+    // Countdown
+    const target = new Date('2026-05-09T15:00:00');
+    const ctn = document.getElementById('countdown');
+    function tick(){
+      const now = new Date();
+      const diff = Math.max(0, target - now);
+      const d = Math.floor(diff/86400000), h = Math.floor(diff%86400000/3600000), m = Math.floor(diff%3600000/60000), s = Math.floor(diff%60000/1000);
+      ctn.innerHTML = ['Days','Hours','Minutes','Seconds'].map((lab,i)=>{
+        const num = [d,h,m,s][i];
+        return `<div class="tile"><div class="num">${String(num).padStart(2,'0')}</div><div class="lab">${lab}</div></div>`
+      }).join('');
+    }
+    tick(); setInterval(tick, 1000);
 
-    </div>
+    // Subtle reveal
+    const io = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible'); io.unobserve(e.target)}})},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-</section>
+    // Wishlist (demo)
+    const wishBox = document.getElementById('wish');
+    const loadWishes = () => JSON.parse(localStorage.getItem('wishes_spacious')||'[]');
+    const saveWishes = (arr) => localStorage.setItem('wishes_spacious', JSON.stringify(arr));
+    function renderWishes(){
+      const data = loadWishes();
+      wishBox.innerHTML = data.map((w,i)=>{
+        return `<div class="kv-card" data-i="${i}">
+          <h3>${w.title}</h3>
+          <p>${w.note||''}</p>
+          <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap">
+            <button class="btn" onclick="toggleReserve(${i})">${w.reserved? 'Unmark reserved' : 'Reserve'}</button>
+            ${w.link? `<a class="btn" href="${w.link}" target="_blank" rel="noopener">Link</a>`:''}
+          </div>
+          <div style="margin-top:10px; color:${w.reserved?'#2b7a2b':'#5f6069'}">Status: ${w.reserved? 'Reserved' : 'Available'}</div>
+        </div>`
+      }).join('');
+    }
+    function addWish(){
+      const title = prompt('Gift title?');
+      if(!title) return;
+      const link = prompt('Link (optional)');
+      const note = prompt('Note (optional)');
+      const items = loadWishes();
+      items.push({title, link, note, reserved:false});
+      saveWishes(items); renderWishes();
+    }
+    function toggleReserve(i){
+      const items = loadWishes();
+      items[i].reserved = !items[i].reserved; saveWishes(items); renderWishes();
+    }
+    renderWishes();
 
-<!-- client section ends -->
-
-<!-- team section starts  -->
-
-<section class="team" id="team">
-
-    <div class="heading">
-        <h1>our creative team</h1>
-        <img src="images/header-img.png" alt="">
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <img src="images/team.jpg" alt="">
-            <h3>win coder</h3>
-            <span>wedding planner</span>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta nisi ea quisquam ipsa molestias itaque, quod quis id doloremque similique!</p>
-            <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
-            </div>
-        </div>
-        <div class="box">
-            <img src="images/team.jpg" alt="">
-            <h3>win coder</h3>
-            <span>wedding planner</span>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta nisi ea quisquam ipsa molestias itaque, quod quis id doloremque similique!</p>
-            <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
-            </div>
-        </div>
-        <div class="box">
-            <img src="images/team.jpg" alt="">
-            <h3>win coder</h3>
-            <span>wedding planner</span>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta nisi ea quisquam ipsa molestias itaque, quod quis id doloremque similique!</p>
-            <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- team section ends -->
-
-<!-- blog section starts  -->
-
-<section class="blog" id="blog">
-
-    <div class="heading">
-        <h1>our latest blogs</h1>
-        <img src="images/header-img.png" alt="">
-    </div>
-
-    <div class="box-container">
-
-        <div class="box">
-            <img src="images/blog-1.jpg" alt="">
-            <div class="info">
-                <h3> <span>01. </span> blog title goes here </h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque praesentium odio a voluptate. Eaque vel ab dolorem, earum optio aliquam.</p>
-                <a href="#" class="btn">learn more</a>
-            </div>
-        </div>
-        <div class="box">
-            <img src="images/blog-2.jpg" alt="">
-            <div class="info">
-                <h3> <span>02. </span> blog title goes here </h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque praesentium odio a voluptate. Eaque vel ab dolorem, earum optio aliquam.</p>
-                <a href="#" class="btn">learn more</a>
-            </div>
-        </div>
-        <div class="box">
-            <img src="images/blog-3.jpg" alt="">
-            <div class="info">
-                <h3> <span>03. </span> blog title goes here </h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque praesentium odio a voluptate. Eaque vel ab dolorem, earum optio aliquam.</p>
-                <a href="#" class="btn">learn more</a>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- blog section ends-->
-
-<!-- contact section starts  -->
-
-<section class="contact" id="contact">
-
-    <div class="heading">
-        <h1>contact us</h1>
-        <img src="images/header-img.png" alt="">
-    </div>
-
-    <form action="contact_form.php" method="post" class="contact-form">
-        <div class="inputBox">
-            <input type="text" placeholder="your name" name="name">
-            <input type="email" placeholder="your email" name="email">
-        </div>
-        <div class="inputBox">
-            <input type="number" placeholder="your number" name="phone">
-            <input type="text" placeholder="your address" name="address">
-        </div>
-        <textarea placeholder="say something" name="message" id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="send message" class="btn" name="send">
-    </form>
-
-</section>
-
-<!-- contact section ends -->
-
-
-
-<!-- footer section  -->
-
-<div class="footer"> created by <span>Win Coder</span> | all rights reserved! </div>
-
-
-
-<script> 
-
-let menu = document.querySelector('#menu-bar');
-let navbar = document.querySelector('.navbar');
-
-menu.addEventListener('click', () =>{
-    menu.classList.toggle('fa-times');
-    navbar.classList.toggle('nav-toggle');
-});
-
-window.onscroll = () =>{
-    menu.classList.remove('fa-times');
-    navbar.classList.remove('nav-toggle');
-}
-
-</script>
-
-
+    // Guest photos (local preview)
+    const gal = document.getElementById('gallery');
+    function handleDrop(e){ e.preventDefault(); if(e.dataTransfer.files) previewFiles(e.dataTransfer.files); }
+    function previewFiles(files){
+      [...files].forEach(file=>{
+        if(!file.type.startsWith('image/')) return;
+        const url = URL.createObjectURL(file);
+        const fig = document.createElement('figure');
+        const img = document.createElement('img'); img.src = url; img.alt = file.name;
+        fig.appendChild(img); gal.appendChild(fig);
+      })
+      alert('Thanks! In this demo, images are only stored locally in your browser.');
+    }
+  </script>
 </body>
-</html>
+</html>'''
