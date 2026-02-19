@@ -2,462 +2,572 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wedding — Soft Botanical Minimalism</title>
-  <meta name="description" content="Elegant, airy wedding page with soft wine-red accents, botanical touches and a magazine-like layout." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sebbe & Ida — Wedding · September 5, 2026</title>
+  <meta name="description" content="Wedding website — details, schedule, travel, accommodation, and RSVP via email." />
 
-  <!-- Fonts -->
+  <!-- Fonts: elegant script + modern sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Italianno&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Palette */
-      --wine:#A03A52;         /* soft wine red */
-      --wine-ink:#7E2A40;     /* deeper text accent */
-      --sage:#A8B9A2;         /* gentle sage */
-      --off:#FAF9F7;          /* off-white background */
-      --ink:#2B2B2F;          /* deep charcoal text */
-      --muted:#6D6D77;        /* secondary text */
-      --beige:#E8E3DC;        /* warm dividers/details */
-      --card:#FFFFFF;         /* card surface */
+      /* Colors (modern, muted) */
+      --burgundy:#7A4D5B;      /* header bar like your example */
+      --burgundy-deep:#5C2F3C; /* accents */
+      --forest:#0F2A22;        /* dark green accents */
+      --paper:#FCFBF9;         /* background */
+      --ink:#111114;           /* primary text */
+      --muted:#5E5E66;         /* secondary text */
+      --line:rgba(17,17,20,.10);
 
-      /* Layout rhythm */
-      --maxw:1180px;
-      --space-xxl: 96px;      /* big section gaps */
-      --space-xl: 64px;       /* large inner spacing */
-      --space-lg: 40px;       /* standard inner spacing */
-      --radius-lg: 16px;
-      --radius-md: 12px;
-      --shadow: 0 18px 50px rgba(0,0,0,.06);
+      /* Typography */
+      --script:"Italianno", cursive;
+      --sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+
+      /* Layout */
+      --max: 1080px;
+      --pad: clamp(18px, 3vw, 28px);
+      --radius: 18px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0; background:var(--off); color:var(--ink); font-family:"Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans"; line-height:1.75}
-    a{color:var(--wine); text-decoration:none}
-
-    /* Botanical background (very subtle) */
-    body:before{
-      content:""; position:fixed; inset:0; pointer-events:none; opacity:.06;
-      background: radial-gradient(600px 400px at 20% 10%, var(--sage), transparent 60%),
-                  radial-gradient(700px 480px at 90% 0%, var(--beige), transparent 60%);
-      z-index:-2;
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:var(--paper);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
 
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:24px 28px}
+    /* Top bar (simple, elegant, like reference) */
+    .topbar{
+      background: var(--burgundy);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px var(--pad);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 10px;
+    }
 
-    /* Top nav (borderless text-nav) */
-    .nav{position:sticky; top:0; z-index:30; backdrop-filter: blur(10px); background: color-mix(in srgb, var(--off) 86%, transparent); border-bottom:1px solid var(--beige)}
-    .nav .inner{max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; gap:20px; padding:14px 20px}
-    .brand{font-family:"Cormorant Garamond", serif; font-weight:700; font-size:1.5rem; letter-spacing:.02em}
-    .navlinks{margin-left:auto; display:flex; gap:14px; flex-wrap:wrap}
-    .navlinks a{font-family:"Space Grotesk", system-ui; font-weight:700; color:var(--ink); padding:8px 10px; border-radius:999px}
-    .navlinks a:hover{color:var(--wine-ink); background:rgba(160,58,82,.08)}
+    .logo{
+      font-family: var(--script);
+      font-size: clamp(38px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: .02em;
+      margin: 2px 0 0;
+      user-select:none;
+    }
 
-    /* Section divider */
-    .divider{height:1px; background:var(--beige); margin: var(--space-xxl) 0}
+    .nav{
+      display:flex;
+      gap: 18px;
+      flex-wrap:wrap;
+      justify-content:center;
+      font-size: 13px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      opacity: .92;
+    }
+    .nav a{
+      color: rgba(255,255,255,.86);
+      text-decoration:none;
+      padding: 10px 6px;
+      position:relative;
+    }
+    .nav a:hover{ color:#fff; }
+    .nav a:after{
+      content:"";
+      position:absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 6px;
+      height: 1px;
+      background: rgba(255,255,255,.55);
+      transform: scaleX(0);
+      transform-origin:center;
+      transition: transform .18s ease;
+    }
+    .nav a:hover:after{ transform: scaleX(1); }
+
+    /* Mobile: compress nav into button */
+    .menuBtn{
+      display:none;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight:600;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    @media (max-width: 760px){
+      .nav{ display:none; width:100%; }
+      .nav.open{ display:flex; }
+      .menuBtn{ display:inline-flex; }
+      .topbar-inner{ padding-bottom: 6px; }
+    }
 
     /* HERO */
-    header.hero{margin-top:18px; border:1px solid var(--beige); border-radius:var(--radius-lg); padding:var(--space-xl); background:
-      linear-gradient(180deg, #fff, color-mix(in srgb, var(--off) 75%, #fff)); box-shadow: var(--shadow)}
-    .hero-grid{display:grid; grid-template-columns: 1.25fr .75fr; gap:var(--space-lg)}
-    @media (max-width:980px){ .hero-grid{grid-template-columns:1fr} }
-    .title{margin:0 0 10px; font-family:"Cormorant Garamond", serif; font-weight:700; font-size: clamp(44px, 6vw, 80px); line-height:1.06; letter-spacing:.02em}
-    .title .em{color:var(--wine)}
-    .subtitle{color:var(--muted); font-size:1.1rem}
-
-    .countdown{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-    .pill{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid var(--beige); background:#fff; font-weight:800; font-family:"Space Grotesk"}
-    .pill .lab{letter-spacing:.06em; text-transform:uppercase; font-size:.78rem; color:var(--muted)}
-
-    .hero-media{display:grid; place-items:center}
-    .circle{
-      width:100%; max-width:460px; aspect-ratio:1/1; border-radius:50%; overflow:hidden; border:6px solid #fff; box-shadow: 0 10px 40px rgba(0,0,0,.08);
-      background:#fff; position:relative
+    .hero{
+      position:relative;
+      height: clamp(420px, 70vh, 720px);
+      overflow:hidden;
+      border-bottom: 1px solid var(--line);
     }
-    .circle img{width:100%; height:100%; object-fit:cover; display:block}
-    .circle:after{content:""; position:absolute; inset:0; border-radius:50%; box-shadow: inset 0 0 0 1px var(--beige)}
+    .hero img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+      filter: saturate(1.03) contrast(1.02);
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.05) 45%, rgba(0,0,0,.35));
+      pointer-events:none;
+    }
 
-    /* Section base */
-    section .h2{display:flex; align-items:center; gap:10px; margin:0 0 14px; font-weight:700; font-size:1.45rem; letter-spacing:.02em}
-    .h2 .dot{width:10px; height:10px; border-radius:50%; background:var(--wine)}
-    .lead{color:var(--muted)}
+    /* Minimal “progress” line like the example */
+    .hero-progress{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom: 18px;
+      display:flex;
+      gap: 10px;
+      z-index: 2;
+      opacity: .85;
+    }
+    .hero-progress span{
+      width: 38px;
+      height: 2px;
+      background: rgba(255,255,255,.55);
+      border-radius: 999px;
+    }
+    .hero-progress span.active{ background:#fff; }
 
-    /* TIMELINE (center spine) */
-    .timeline{position:relative; padding:10px 0}
-    .timeline:before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:var(--beige); transform:translateX(-50%)}
-    .t-item{position:relative; display:grid; grid-template-columns: 1fr 1fr; gap:var(--space-lg); margin: 28px 0}
-    @media (max-width:900px){ .t-item{grid-template-columns:1fr;}
-      .t-item .t-left,.t-item .t-right{padding-left:0; padding-right:0} }
-    .t-left{padding-right:var(--space-lg); text-align:right}
-    .t-right{padding-left:var(--space-lg)}
-    .t-bullet{position:absolute; left:50%; top:8px; width:14px; height:14px; background:var(--wine); border-radius:50%; outline:4px solid #fff; box-shadow:0 0 0 1px var(--beige); transform:translate(-50%, 0)}
-    .t-time{font-family:"Space Grotesk"; font-weight:700; color:var(--wine-ink)}
-    .place{font-weight:700}
-    .map-btn{display:inline-block; margin-top:8px; padding:8px 12px; border-radius:999px; border:1px solid var(--sage); color:#2a3b2a; font-weight:700; font-family:"Space Grotesk"}
+    /* Content wrapper */
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
 
-    .photo-soft{border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--beige); box-shadow: var(--shadow)}
-    .photo-soft img{display:block; width:100%; height:100%; object-fit:cover}
+    /* Section styling */
+    section{
+      padding: clamp(44px, 6vw, 84px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    h2{
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin: 0 0 14px;
+      color: var(--burgundy-deep);
+    }
+    .lede{
+      margin: 0 0 22px;
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: 16px;
+    }
 
-    /* GOOD TO KNOW (shadow-only cards) */
-    .gk-grid{display:grid; grid-template-columns: repeat(4, 1fr); gap:var(--space-lg)}
-    @media (max-width:1100px){ .gk-grid{grid-template-columns: 1fr 1fr} }
-    @media (max-width:640px){ .gk-grid{grid-template-columns: 1fr} }
-    .gk-card{background: var(--card); border-radius: var(--radius-md); box-shadow: var(--shadow); padding: 22px}
-    .gk-icon{width:28px; height:28px; border-radius:8px; display:grid; place-items:center; color:var(--wine); margin-bottom:8px; border:1px solid var(--beige); background:#fff}
-    .gk-title{font-family:"Cormorant Garamond"; font-weight:700; font-size:1.2rem}
+    /* Modern editorial grid */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
 
-    /* WEDDING PARTY (oval portraits) */
-    .wp-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-lg)}
-    @media (max-width:900px){ .wp-grid{grid-template-columns:1fr} }
-    .wp-card{display:grid; grid-template-columns: 180px 1fr; gap:24px; align-items:center; background:var(--card); border-radius:var(--radius-lg); box-shadow: var(--shadow); padding:24px}
-    @media (max-width:640px){ .wp-card{grid-template-columns:1fr} }
-    .oval{width:180px; height:220px; border-radius:60% 60% 55% 55% / 65% 65% 45% 45%; overflow:hidden; border:1px solid var(--beige)}
-    .oval img{width:100%; height:100%; object-fit:cover; display:block}
-    .wp-name{font-family:"Cormorant Garamond"; font-size:1.4rem; font-weight:700}
-    .tag{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; border:1px solid var(--beige); font-family:"Space Grotesk"; font-weight:700; margin-right:6px}
+    /* Cards */
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background:#fff;
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: .01em;
+    }
+    .meta{
+      margin:0;
+      color: var(--muted);
+    }
 
-    /* GIFTS (beige board) */
-    .gift-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-lg)}
-    @media (max-width:900px){ .gift-grid{grid-template-columns:1fr} }
-    .gift{background:linear-gradient(180deg, #fff, color-mix(in srgb, var(--beige) 35%, #fff)); border:1px solid var(--beige); border-radius:var(--radius-md); padding:20px}
-    .gift h4{margin:0 0 6px}
-    .gift .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid var(--beige); font-family:"Space Grotesk"; font-weight:700}
-    .btn.wine{background:var(--wine); color:#fff; border-color:var(--wine)}
-    .btn.sage{background:transparent; color:#2a3b2a; border-color:var(--sage)}
+    /* Schedule list */
+    .schedule{
+      display:grid;
+      gap: 14px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 14px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    .time{
+      font-weight: 600;
+      color: var(--forest);
+      letter-spacing:.02em;
+    }
+    .what{ font-weight: 600; margin:0 0 4px; }
+    .note{ margin:0; color: var(--muted); }
 
-    /* FORMS */
-    form{display:grid; gap:14px}
-    .row-2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
-    .row-3{display:grid; grid-template-columns: 1fr 1fr 1fr; gap:14px}
-    @media (max-width:900px){ .row-2,.row-3{grid-template-columns:1fr} }
-    input,select,textarea{width:100%; padding:12px 14px; border:1px solid var(--beige); border-radius:12px; background:#fff; font:inherit; color:var(--ink)}
-    textarea{min-height:120px}
+    @media (max-width: 560px){
+      .row{ grid-template-columns: 1fr; }
+    }
 
-    .form-card{background:var(--card); border:1px solid var(--beige); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:24px}
-    .rsvp-box{background:linear-gradient(180deg, #fff, color-mix(in srgb, var(--beige) 40%, #fff)); border:1px solid var(--beige); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:24px}
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      text-decoration:none;
+      font-weight: 600;
+    }
+    .btn:hover{ border-color: rgba(17,17,20,.25); }
+    .btn.primary{
+      background: var(--forest);
+      border-color: var(--forest);
+      color:#fff;
+    }
+    .btn.burgundy{
+      background: var(--burgundy-deep);
+      border-color: var(--burgundy-deep);
+      color:#fff;
+    }
 
-    /* PHOTOS (masonry) */
-    .masonry{columns: 3 300px; column-gap: 16px}
-    @media (max-width:1000px){ .masonry{columns:2 260px} }
-    @media (max-width:640px){ .masonry{columns:1 300px} }
-    .masonry figure{break-inside: avoid; margin:0 0 16px; border-radius:14px; overflow:hidden; box-shadow: var(--shadow); border:1px solid var(--beige)}
-    .masonry img{width:100%; height:auto; display:block}
+    /* RSVP block */
+    .rsvp{
+      background: linear-gradient(180deg, #fff, rgba(15,42,34,.02));
+      border: 1px solid rgba(15,42,34,.16);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    code.inline{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      background: rgba(122,77,91,.10);
+      border: 1px solid rgba(122,77,91,.18);
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+    ul.clean{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    ul.clean li{ margin: 6px 0; }
 
-    /* Lightbox */
-    .lightbox{position: fixed; inset:0; background: rgba(0,0,0,.8); display:none; place-items:center; z-index:100}
-    .lightbox.open{display:grid}
-    .lightbox img{max-width:92vw; max-height:88vh; border-radius:12px; box-shadow: 0 30px 60px rgba(0,0,0,.5)}
+    /* Footer */
+    footer{
+      padding: 34px 0 50px;
+      color: var(--muted);
+      text-align:center;
+    }
 
-    /* Reveal */
-    .reveal{opacity:0; transform: translateY(12px); transition: opacity .45s ease, transform .45s ease}
-    .reveal.visible{opacity:1; transform:none}
-
-    footer{color:var(--muted); text-align:center; padding:28px 6px; border-top:1px solid var(--beige); margin-top:var(--space-xxl)}
+    /* Optional: switch to more green-forward theme by swapping accent */
+    /* body.green { --burgundy:#1F3A31; --burgundy-deep:#0F2A22; --accent: var(--forest); } */
   </style>
 </head>
+
 <body>
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="inner">
-      <div class="brand">Wedding</div>
-      <div class="navlinks">
-        <a href="#hero">Home</a>
-        <a href="#ceremony">Ceremony</a>
-        <a href="#dinner">Dinnerparty</a>
-        <a href="#details">Good to know</a>
-        <a href="#party">Toastmasters</a>
-        <a href="#gifts">Gifts</a>
-        <a href="#speeches">Speeches</a>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <!-- Change names -->
+      <div class="logo">Sebbe &amp; Ida</div>
+
+      <button class="menuBtn" type="button" onclick="toggleMenu()">Menu</button>
+
+      <nav id="nav" class="nav" aria-label="Primary">
+        <a href="#welcome">Welcome</a>
+        <a href="#story">Story</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#travel">Travel</a>
+        <a href="#qa">Q&amp;A</a>
+        <a href="#party">Wedding Party</a>
+        <a href="#registry">Registry</a>
         <a href="#rsvp">RSVP</a>
-        <a href="#photos">Photos</a>
-      </div>
+      </nav>
     </div>
-  </nav>
-
-  <div class="wrap">
-    <!-- HERO -->
-    <header id="hero" class="hero reveal">
-      <div class="hero-grid">
-        <div>
-          <h1 class="title"><span class="em">Sebbe & Ida</span> are getting married</h1>
-          <p class="subtitle">City/Venue — Gothenburg <strong>September 5th, 2026</strong></p>
-          <div class="countdown" id="countdown" aria-live="polite">
-            <!-- Pills are filled by JS -->
-          </div>
-        </div>
-        <div class="hero-media">
-          <figure class="circle">
-            <!-- Replace src with your hero image -->
-            <img src="https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/51ab2bdb401e5091c11f6028de45c317a0be1af1/bild1.jpg" alt="Our Wedding Photo" style="max-width:100%; height:auto;">
-          </figure>
-        </div>
-      </div>
-    </header>
-
-    <!-- CEREMONY (Timeline) -->
-    <section id="ceremony" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Ceremony</h2>
-      <div class="timeline">
-        <div class="t-item">
-          <span class="t-bullet" aria-hidden="true"></span>
-          <div class="t-left">
-            <div class="t-time">2:30 PM</div>
-            <div class="lead">Seating opens</div>
-          </div>
-          <div class="t-right">
-            <div class="t-time">3:00 PM</div>
-            <div><span class="place">Ceremony at Quality Hotel Waterfront</span><br><span class="lead">@resturant</span></div>
-            <a class="map-btn" href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Open map</a>
-          </div>
-        </div>
-      </div>
-      <figure class="photo-soft" style="margin-top:20px">
-        <img src="" alt="Ceremony location röda sten" />
-      </figure>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- DINNER (Timeline style) -->
-    <section id="dinner" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Dinner & Party</h2>
-      <div class="timeline">
-        <div class="t-item">
-          <span class="t-bullet" aria-hidden="true"></span>
-          <div class="t-left">
-            <div class="t-time">4:00 PM</div>
-            <div class="lead">Arrival to reception venue</div>
-          </div>
-          <div class="t-right">
-            <div class="t-time">7:30 PM</div>
-            <div><span class="place">Cake & Coffee</span><br><span class="lead">Then first dance</span></div>
-            <a class="map-btn" href="#" target="_blank" rel="noopener">Open map</a>
-          </div>
-        </div>
-      </div>
-      <figure class="photo-soft" style="margin-top:20px">
-        <img src="" alt="Reception venue (replace)" />
-      </figure>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- GOOD TO KNOW -->
-    <section id="details" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Good to know</h2>
-      <div class="gk-grid">
-        <div class="gk-card">
-          <div class="gk-icon">🍽️</div>
-          <div class="gk-title">Food & drinks</div>
-          <p class="lead">Starter, main and wedding cake. Drinks during dinner; bar afterwards.</p>
-        </div>
-        <div class="gk-card">
-          <div class="gk-icon">🏨</div>
-          <div class="gk-title">Accommodation</div>
-          <p class="lead">Main hotel near the reception. More options below.</p>
-        </div>
-        <div class="gk-card">
-          <div class="gk-icon">👗</div>
-          <div class="gk-title">Dress code</div>
-          <p class="lead">Lounge suit or equivalent. Optional wine‑red accents.</p>
-        </div>
-        <div class="gk-card">
-          <div class="gk-icon">🧸</div>
-          <div class="gk-title">Kids</div>
-          <p class="lead">Adults‑only celebration (babies welcome).</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- WEDDING PARTY -->
-    <section id="party" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Wedding party & hosts</h2>
-      <div class="wp-grid">
-        <article class="wp-card">
-          <figure class="oval"><img src="" alt="Best man portrait (replace)"></figure>
-          <div>
-            <div class="wp-name">Name Surname</div>
-            <div class="lead">Best man</div>
-            <div style="margin-top:10px">
-              <span class="tag">📞 +46 70‑000 00 00</span>
-              <a class="tag" href="mailto:name@example.com">✉️ name@example.com</a>
-            </div>
-          </div>
-        </article>
-        <article class="wp-card">
-          <figure class="oval"><img src="" alt="Maid of honor portrait (replace)"></figure>
-          <div>
-            <div class="wp-name">Name Surname</div>
-            <div class="lead">Maid of honor</div>
-            <div style="margin-top:10px">
-              <span class="tag">📞 +46 70‑000 00 00</span>
-              <a class="tag" href="mailto:name@example.com">✉️ name@example.com</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- GIFTS / WISHLIST -->
-    <section id="gifts" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Gifts</h2>
-      <p class="lead">Your presence is all we wish for — but if you want to give a gift, feel free to use our wishlist.</p>
-      <div class="gift-grid" id="giftGrid">
-        <!-- Sample gifts rendered by JS helpers or add manually below -->
-      </div>
-      <div style="margin-top:18px">
-        <button class="btn wine" type="button" onclick="addGiftPrompt()">Add example gift</button>
-        <a class="btn sage" href="#" target="_blank" rel="noopener">Open external wishlist</a>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- SPEECHES -->
-    <section id="speeches" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Speeches</h2>
-      <div class="form-card">
-        <p class="lead">Planning a speech or performance? Please sign up below. (Demo only — connect to Microsoft Forms/Google Forms when publishing.)</p>
-        <form aria-label="Speech signup">
-          <div class="row-2">
-            <input type="text" placeholder="Your name" required>
-            <input type="email" placeholder="Email" required>
-          </div>
-          <div class="row-3">
-            <select required>
-              <option value="" disabled selected>Type of act</option>
-              <option>Speech</option>
-              <option>Performance</option>
-              <option>Surprise</option>
-            </select>
-            <input type="text" placeholder="Approx. length (min)">
-            <input type="text" placeholder="Tech needs (e.g. music)">
-          </div>
-          <textarea placeholder="Description"></textarea>
-          <button class="btn wine" type="button" onclick="alert('Demo — connect this form on publish')">Send signup</button>
-        </form>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- RSVP -->
-    <section id="rsvp" class="reveal">
-      <h2 class="h2"><span class="dot"></span> RSVP</h2>
-      <div class="rsvp-box">
-        <p class="lead">Please RSVP by <strong>April 10</strong>.</p>
-        <form aria-label="RSVP form">
-          <div class="row-2">
-            <input type="text" placeholder="Full name" required>
-            <input type="email" placeholder="Email" required>
-          </div>
-          <div class="row-3">
-            <select required>
-              <option value="" disabled selected>Will you attend?</option>
-              <option>Gladly accept</option>
-              <option>Regretfully decline</option>
-            </select>
-            <input type="number" min="1" max="10" placeholder="# of guests">
-            <input type="text" placeholder="Allergies / dietary preferences">
-          </div>
-          <textarea placeholder="Message (optional)"></textarea>
-          <button class="btn wine" type="button" onclick="alert('Thank you! (demo)')">Send RSVP</button>
-        </form>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <!-- PHOTOS (masonry) -->
-    <section id="photos" class="reveal">
-      <h2 class="h2"><span class="dot"></span> Your photos</h2>
-      <p class="lead">After the wedding, please share your favorite photos. Drag & drop or click to upload — preview only in this demo.</p>
-      <div style="margin:14px 0">
-        <input type="file" multiple accept="image/*" onchange="previewFiles(this.files)" />
-      </div>
-      <div class="masonry" id="masonry">
-        <!-- Masonry figures go here -->
-      </div>
-    </section>
-
-    <footer class="reveal">Designed in a soft, botanical minimalist style with gentle wine‑red accents. ©</footer>
   </div>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Image preview"><img src="" alt="Preview" /></div>
+  <!-- HERO -->
+  <header class="hero" id="welcome">
+    <!-- Replace hero image -->
+    <img src="https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/51ab2bdb401e5091c11f6028de45c317a0be1af1/bild1.jpg" alt="Sebbe and Ida" />
+
+    <div class="hero-progress" aria-hidden="true">
+      <span class="active"></span><span></span><span></span>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- WELCOME -->
+    <section aria-label="Welcome">
+      <h2>Welcome</h2>
+      <p class="lede">
+        We’re getting married — and we’d love for you to celebrate with us.
+        Below you’ll find everything you need: the plan for the day, travel info, where to stay, and how to RSVP.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>When & where</h3>
+          <p class="meta"><b>Saturday, September 5, 2026</b></p>
+          <p class="meta">Quality Hotel Waterfront, Gothenburg</p>
+          <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn burgundy" href="#schedule">View schedule</a>
+            <a class="btn" target="_blank" rel="noopener"
+              href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu">Open map</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>RSVP deadline</h3>
+          <p class="meta">Please RSVP by <b>April 10</b>.</p>
+          <p class="meta">We’ll collect RSVPs by email only.</p>
+          <p style="margin-top:14px;">
+            <a class="btn primary" href="#rsvp">RSVP instructions</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section id="story">
+      <h2>Story</h2>
+      <p class="lede">
+        A short text about how you met / your journey / what you’re looking forward to.
+        Keep it brief and warm — 4–7 lines usually feels modern and intentional.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Our story (short)</h3>
+          <p class="meta">
+            Replace this with your own text. You can keep it minimal for a more modern feel.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Dress code</h3>
+          <p class="meta">Lounge suit / equivalent.</p>
+          <p class="meta">Burgundy details are welcome (optional).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <p class="lede">Times may be adjusted slightly — this is the plan for now.</p>
+
+      <div class="schedule">
+        <div class="row">
+          <div class="time">2:30 PM</div>
+          <div>
+            <p class="what">Doors open & seating</p>
+            <p class="note">Arrive, find your seat, and settle in.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="time">3:00 PM</div>
+          <div>
+            <p class="what">Ceremony</p>
+            <p class="note">Quality Hotel Waterfront, Gothenburg.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="time">4:00 PM → late</div>
+          <div>
+            <p class="what">Dinner & celebration</p>
+            <p class="note">Dinner, cake, first dance — then party.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAVEL / ACCOMMODATION -->
+    <section id="travel">
+      <h2>Travel</h2>
+      <p class="lede">Everything practical: getting there, parking, and where to stay.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Accommodation (recommended)</h3>
+          <p class="meta"><b>Quality Hotel Waterfront</b> — the wedding hotel.</p>
+          <p class="meta" style="margin-top:10px;">Suggested room types (availability varies):</p>
+          <ul class="clean">
+            <li>Standard Double</li>
+            <li>Superior Double</li>
+            <li>Family Room</li>
+            <li>Compact Double</li>
+          </ul>
+          <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" target="_blank" rel="noopener"
+               href="https://www.strawberryhotels.com/hotels/sweden/gothenburg/quality-hotel-waterfront/">
+              Book a room (official)
+            </a>
+            <a class="btn" href="#rsvp">RSVP first</a>
+          </p>
+          <p class="meta" style="margin-top:10px;">
+            Official booking page via Strawberry. [1](https://www.figma.com/community/file/1444403153564554145/luxevow-wedding-invitation-landing-page-with-rsvp)
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Getting there</h3>
+          <p class="meta">We’ll add detailed transport/parking tips closer to the date.</p>
+          <p class="meta" style="margin-top:10px;">
+            If you’re coming from out of town, consider arriving earlier in the day to avoid stress.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A -->
+    <section id="qa">
+      <h2>Q&amp;A</h2>
+      <p class="lede">Quick answers to common questions (super modern and helpful).</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Kids?</h3>
+          <p class="meta">Adults-only celebration (babies welcome). If this is difficult, please reach out.</p>
+        </div>
+        <div class="card">
+          <h3>Plus-ones?</h3>
+          <p class="meta">Please follow what’s stated on your invitation. If you’re unsure, just ask us.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEDDING PARTY -->
+    <section id="party">
+      <h2>Wedding Party</h2>
+      <p class="lede">Add toastmasters / key contacts here. Keep it clean and minimal.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Toastmaster</h3>
+          <p class="meta"><b>Name Surname</b></p>
+          <p class="meta">Phone: +46 70‑000 00 00</p>
+          <p class="meta">Email: name@example.com</p>
+        </div>
+        <div class="card">
+          <h3>Toastmaster</h3>
+          <p class="meta"><b>Name Surname</b></p>
+          <p class="meta">Phone: +46 70‑000 00 00</p>
+          <p class="meta">Email: name@example.com</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTRY -->
+    <section id="registry">
+      <h2>Registry</h2>
+      <p class="lede">Minimal, non-tacky copy: “Your presence is enough” + optional wishlist link.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Your presence is enough</h3>
+          <p class="meta">
+            We’re simply grateful you’re celebrating with us.
+            If you’d still like to give something, we’ll share a wishlist here.
+          </p>
+          <p style="margin-top:14px;">
+            <a class="btn" href="#">Open wishlist (add link)</a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>Alternative</h3>
+          <p class="meta">If you prefer, a small contribution toward our honeymoon is always appreciated (optional).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp">
+      <h2>RSVP</h2>
+      <p class="lede">RSVP is by email only. Please include diet/allergies and any important needs.</p>
+
+      <div class="rsvp">
+        <!-- CHANGE THIS EMAIL -->
+        <p class="meta">Email us at: <code class="inline">rsvp@example.com</code></p>
+
+        <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn burgundy"
+             href="mailto:rsvp@example.com?subject=RSVP%20%E2%80%94%20Sebbe%20%26%20Ida&body=Name%3A%0AAttending%20(accept%2Fdecline)%3A%0ANumber%20of%20guests%3A%0ADietary%20requirements%20%2F%20allergies%3A%0AOther%20important%20info%3A%0A">
+            Send RSVP email (template)
+          </a>
+        </p>
+
+        <p class="meta" style="margin-top:12px;">Please include:</p>
+        <ul class="clean">
+          <li><b>Full name</b> (and names of any additional guests)</li>
+          <li><b>Accept / Decline</b></li>
+          <li><b>Number of guests</b> (if applicable)</li>
+          <li><b>Dietary requirements</b> (e.g. vegetarian/vegan) and <b>allergies</b></li>
+          <li><b>Other important needs</b> (accessibility, etc.)</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div style="font-family:var(--script); font-size:40px; color:var(--burgundy-deep); margin-bottom:10px;">
+          Sebbe &amp; Ida
+        </div>
+        <div>September 5, 2026 · Gothenburg</div>
+      </div>
+    </footer>
+
+  </main>
 
   <script>
-    // ===== Countdown =====
-    const target = new Date('2026-09-06T15:00:00'); // change your date/time
-    const ctn = document.getElementById('countdown');
-    function tick(){
-      const now = new Date();
-      const diff = Math.max(0, target - now);
-      const d = Math.floor(diff/86400000), h = Math.floor(diff%86400000/3600000), m = Math.floor(diff%3600000/60000), s = Math.floor(diff%60000/1000);
-      const parts = [
-        {lab:'Days', val:d}, {lab:'Hours', val:h}, {lab:'Minutes', val:m}, {lab:'Seconds', val:s}
-      ];
-      ctn.innerHTML = parts.map(p=>`<span class="pill"><strong>${String(p.val).padStart(2,'0')}</strong><span class="lab">${p.lab}</span></span>`).join('');
+    function toggleMenu(){
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('open');
     }
-    tick(); setInterval(tick, 1000);
-
-    // ===== Reveal on scroll =====
-    const io = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible'); io.unobserve(e.target)}})},{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    // ===== Simple gift wishlist (localStorage demo) =====
-    const keyGifts = 'gifts_botanical';
-    const giftGrid = document.getElementById('giftGrid');
-    const loadGifts = ()=> JSON.parse(localStorage.getItem(keyGifts)||'[]');
-    const saveGifts = (arr)=> localStorage.setItem(keyGifts, JSON.stringify(arr));
-    function renderGifts(){
-      const data = loadGifts();
-      giftGrid.innerHTML = data.map((g,i)=>{
-        return `<div class="gift">
-          <h4>${g.title}</h4>
-          <div class="lead">${g.note||''}</div>
-          <div class="actions">
-            <button class="btn wine" onclick="toggleReserve(${i})">${g.reserved? 'Unmark reserved' : 'Reserve'}</button>
-            ${g.link? `<a class="btn sage" href="${g.link}" target="_blank" rel="noopener">Open link</a>`:''}
-          </div>
-          <div class="lead" style="margin-top:6px; color:${g.reserved?'#2b7a2b':'#6D6D77'}">Status: ${g.reserved? 'Reserved' : 'Available'}</div>
-        </div>`
-      }).join('');
-    }
-    function addGiftPrompt(){
-      const title = prompt('Gift title?'); if(!title) return;
-      const link = prompt('Link (optional)');
-      const note = prompt('Note (optional)');
-      const items = loadGifts(); items.push({title, link, note, reserved:false}); saveGifts(items); renderGifts();
-    }
-    function toggleReserve(i){ const items = loadGifts(); items[i].reserved = !items[i].reserved; saveGifts(items); renderGifts(); }
-    renderGifts();
-
-    // ===== Masonry / Photos with lightbox =====
-    const mason = document.getElementById('masonry');
-    const lb = document.getElementById('lightbox'); const lbImg = lb.querySelector('img');
-    function previewFiles(files){
-      [...files].forEach(file=>{
-        if(!file.type.startsWith('image/')) return;
-        const url = URL.createObjectURL(file);
-        const fig = document.createElement('figure');
-        const img = document.createElement('img'); img.src = url; img.alt = file.name;
-        img.addEventListener('click', ()=>{ lbImg.src = url; lb.classList.add('open') });
-        fig.appendChild(img); mason.appendChild(fig);
-      });
-      alert('Thanks! In this demo, photos are only previewed locally in your browser.');
-    }
-    lb.addEventListener('click', ()=> lb.classList.remove('open'));
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') lb.classList.remove('open') });
   </script>
 </body>
-</html>'''
-
+</html>
