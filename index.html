@@ -120,6 +120,29 @@
       padding: 10px 6px;
       position:relative;
     }
+        
+    .nav{
+      gap: 6px; /* lite tajtare när vi har separators */
+    }
+
+    .nav a{
+      padding: 10px 10px; /* lite mer sid-padding så det känns luftigt */
+    }
+
+    .nav a + a{
+      padding-left: 18px; /* plats för | */
+    }
+
+    .nav a + a::before{
+      content: "|";
+      position: absolute;
+      left: 0;                 /* hamnar i vänsterkanten på länken */
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.55);
+      pointer-events: none;    /* så | inte påverkar klick */
+    }
+
     .nav a:hover{ color:#fff; }
     .nav a:after{
       content:"";
