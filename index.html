@@ -51,6 +51,9 @@
       line-height:1.7;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
+
+      text-align: center; /* <-- NYTT: centrerar all text som standard */
+
     }
     :focus-visible{
       outline: 3px solid rgba(122,63,83,.28);
@@ -77,7 +80,7 @@
     }
     .logo{
       font-family: var(--display);
-      font-size: clamp(28px, 3.2vw, 40px);
+      font-size: clamp(38px, 3.8vw, 52px);
       line-height: 1.05;
       letter-spacing: .10em;
       text-transform: uppercase;
@@ -88,7 +91,7 @@
     .logo .amp{
       font-family: var(--script);
       font-weight: 400;
-      font-size: 1.25em;
+      font-size: 1.35em;
       letter-spacing: 0;
       text-transform:none;
       margin: 0 .2ch;
@@ -246,7 +249,7 @@
       color: var(--burgundy-deep);
     }
     .lede{
-      margin: 0 0 22px;
+      margin: 0 auto 22px;
       color: var(--muted);
       max-width: 70ch;
       font-size: 16px;
@@ -287,6 +290,10 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: #fff;
+      
+     text-align: center;     
+     justify-items: center;
+
     }
     .time{
       font-weight: 700;
@@ -347,8 +354,10 @@
     }
     ul.clean{
       margin: 12px 0 0;
-      padding-left: 18px;
+      padding-left: 0;
+      list-style-position: inside;
       color: var(--muted);
+      text-align: center;
     }
     ul.clean li{ margin: 6px 0; }
 
