@@ -86,6 +86,11 @@
       font-weight: 600;
       user-select:none;
       margin: 2px 0 0;
+      
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+
     }
     .logo .amp{
       font-family: var(--script);
@@ -381,7 +386,9 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo">Sebbe <span class="amp">&amp;</span> Ida</div>
+      <a class="logo" href="#welcome" aria-label="Till startsidan">
+        Sebbe <span class="amp">&amp;</span> Ida
+      </a>
 
       <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" onclick="toggleMenu()">
         Menu
