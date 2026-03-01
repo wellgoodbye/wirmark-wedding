@@ -3,28 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sebbe & Ida — Wedding · September 5, 2026</title>
+  <title>Sebbe &amp; Ida — Wedding · September 5, 2026</title>
   <meta name="description" content="Wedding website — details, schedule, travel, accommodation, and RSVP via email." />
-  <meta name="theme-color" content="#8A1F3D" />
+  <meta name="theme-color" content="#7A3F53" />
 
-  <!-- Fonts: elegant serif for brand + modern sans -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&family=Italianno&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* More vibrant palette */
-      --burgundy:#8A1F3D;
-      --burgundy-deep:#5A0F24;
-      --forest:#0A3D2E;
-      --paper:#FFFCF8;
+      /* Softer burgundy/plum (muted, elegant) */
+      --burgundy:#7A3F53;
+      --burgundy-deep:#5C2A3A;
+      --plum:#6A4B6B;
+      --forest:#0F2A22;
+
+      --paper:#FFFCF9;
       --ink:#111114;
-      --muted:#4E4E57;
+      --muted:#4F4F59;
       --line:rgba(17,17,20,.10);
 
       /* Typography */
-      --display: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
+      --display:"Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
       --script:"Italianno", cursive;
       --sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
 
@@ -33,8 +35,10 @@
       --pad: clamp(18px, 3vw, 28px);
       --radius: 18px;
 
-      /* Hero tuning (adjust this if needed!) */
-      --hero-pos-y: 32%;
+      /* HERO controls */
+      --hero-height: clamp(420px, 70vh, 760px);
+      --hero-zoom: 1.12;         /* increase for more zoom (e.g. 1.08–1.20) */
+      --hero-pos: 50% 42%;       /* move focal point if needed */
     }
 
     *{box-sizing:border-box}
@@ -48,22 +52,19 @@
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
-
-    /* Better accessibility defaults */
-    a{ color: inherit; }
     :focus-visible{
-      outline: 3px solid rgba(138,31,61,.35);
+      outline: 3px solid rgba(122,63,83,.28);
       outline-offset: 3px;
       border-radius: 10px;
     }
 
-    /* Top bar */
+    /* TOP BAR */
     .topbar{
       background: var(--burgundy);
-      color: #fff;
+      color:#fff;
       position: sticky;
-      top: 0;
-      z-index: 50;
+      top:0;
+      z-index:50;
       box-shadow: 0 10px 30px rgba(0,0,0,.12);
     }
     .topbar-inner{
@@ -75,24 +76,22 @@
       align-items:center;
       gap: 10px;
     }
-
-    /* Cleaner, more premium logo */
     .logo{
       font-family: var(--display);
       font-size: clamp(28px, 3.2vw, 40px);
       line-height: 1.05;
-      letter-spacing: .06em;
+      letter-spacing: .10em;
       text-transform: uppercase;
-      margin: 2px 0 0;
-      user-select:none;
       font-weight: 600;
+      user-select:none;
+      margin: 2px 0 0;
     }
     .logo .amp{
       font-family: var(--script);
       font-weight: 400;
-      font-size: 1.2em;
+      font-size: 1.25em;
       letter-spacing: 0;
-      text-transform: none;
+      text-transform:none;
       margin: 0 .2ch;
       display:inline-block;
       transform: translateY(2px);
@@ -124,6 +123,7 @@
       bottom: 6px;
       height: 1px;
       background: rgba(255,255,255,.70);
+      transform: scaleX(0);
       transform-origin:center;
       transition: transform .18s ease;
     }
@@ -149,60 +149,98 @@
       .topbar-inner{ padding-bottom: 10px; }
     }
 
-    /* HERO */
+    /* HERO — clean, no frame */
     .hero{
       position:relative;
-      height: clamp(360px, 62vh, 640px); /* slightly smaller */
+      height: var(--hero-height);
       overflow:hidden;
       border-bottom: 1px solid var(--line);
       background: #000;
     }
-    .hero img{
+    .hero-slide{
+      position:absolute;
+      inset:0;
       width:100%;
       height:100%;
-      object-fit:cover;
-      object-position: 50% var(--hero-pos-y); /* key for “less zoomed on faces” */
+      object-fit: cover;             /* more zoomed feeling */
+      object-position: var(--hero-pos);
+      transform: scale(var(--hero-zoom));
+      transform-origin: center;
       display:block;
-      /* remove extra zoom, increase vibrance */
-      filter: saturate(1.18) contrast(1.06) brightness(1.03);
+      opacity:0;
+      transition: opacity 900ms ease;
+
+      /* gentle grading (not too punchy) */
+      filter: saturate(1.06) contrast(1.05) brightness(1.03);
     }
+    .hero-slide.is-active{ opacity:1; }
+
+    /* Subtle overlay to tie it to burgundy/plum */
     .hero:after{
       content:"";
       position:absolute; inset:0;
-      /* slightly richer tint */
+      pointer-events:none;
       background:
         linear-gradient(180deg,
-          rgba(0,0,0,.30),
-          rgba(138,31,61,.08) 45%,
-          rgba(0,0,0,.40)
-        );
-      pointer-events:none;
+          rgba(0,0,0,.22),
+          rgba(122,63,83,.08) 45%,
+          rgba(0,0,0,.30));
     }
 
-    .hero-progress{
+    /* Controls */
+    .hero-controls{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 var(--pad);
+      z-index: 3;
+      pointer-events:none;
+    }
+    .hero-btn{
+      pointer-events:auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(0,0,0,.16);
+      color:#fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor:pointer;
+      backdrop-filter: blur(6px);
+      transition: background .12s ease, transform .12s ease;
+    }
+    .hero-btn:hover{ background: rgba(0,0,0,.24); transform: translateY(-1px); }
+
+    .hero-dots{
       position:absolute;
       left:50%;
       transform:translateX(-50%);
       bottom: 18px;
       display:flex;
       gap: 10px;
-      z-index: 2;
-      opacity: .9;
+      z-index: 3;
+      opacity: .92;
     }
-    .hero-progress span{
-      width: 38px;
+    .hero-dots button{
+      width: 34px;
       height: 2px;
-      background: rgba(255,255,255,.60);
+      border: 0;
+      background: rgba(255,255,255,.50);
       border-radius: 999px;
+      cursor:pointer;
+      padding:0;
     }
-    .hero-progress span.active{ background:#fff; }
+    .hero-dots button.active{ background:#fff; }
 
+    /* Content wrapper */
     .wrap{
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 var(--pad);
     }
-
     section{
       padding: clamp(44px, 6vw, 84px) 0;
       border-bottom: 1px solid var(--line);
@@ -245,15 +283,10 @@
       font-size: 16px;
       letter-spacing: .01em;
     }
-    .meta{
-      margin:0;
-      color: var(--muted);
-    }
+    .meta{ margin:0; color: var(--muted); }
 
-    .schedule{
-      display:grid;
-      gap: 14px;
-    }
+    /* Schedule list */
+    .schedule{ display:grid; gap: 14px; }
     .row{
       display:grid;
       grid-template-columns: 110px 1fr;
@@ -270,11 +303,11 @@
     }
     .what{ font-weight: 600; margin:0 0 4px; }
     .note{ margin:0; color: var(--muted); }
-
     @media (max-width: 560px){
       .row{ grid-template-columns: 1fr; }
     }
 
+    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -305,16 +338,17 @@
       color:#fff;
     }
 
+    /* RSVP block */
     .rsvp{
-      background: linear-gradient(180deg, #fff, rgba(10,61,46,.03));
-      border: 1px solid rgba(10,61,46,.18);
+      background: linear-gradient(180deg, #fff, rgba(122,63,83,.03));
+      border: 1px solid rgba(122,63,83,.16);
       border-radius: var(--radius);
       padding: 18px;
     }
     code.inline{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      background: rgba(138,31,61,.10);
-      border: 1px solid rgba(138,31,61,.20);
+      background: rgba(122,63,83,.10);
+      border: 1px solid rgba(122,63,83,.18);
       padding: 6px 10px;
       border-radius: 12px;
       font-size: 13px;
@@ -332,10 +366,9 @@
       text-align:center;
     }
 
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior:auto; }
-      .btn, .nav a:after{ transition:none; }
+      .btn, .nav a:after, .hero-slide{ transition:none; }
       .btn:hover{ transform:none; }
     }
   </style>
@@ -345,35 +378,41 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo">Sebbe<span class="amp">&</span> Ida</div>
+      <div class="logo">Sebbe <span class="amp">&amp;</span> Ida</div>
 
       <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" onclick="toggleMenu()">
         Menu
       </button>
 
       <nav id="nav" class="nav" aria-label="Primary">
-        <a href="#welcome" onclick="closeMenu()">Welcome</a>
-        <a href="#story" onclick="closeMenu()">Story</a>
-        <a href="#schedule" onclick="closeMenu()">Schedule</a>
-        <a href="#travel" onclick="closeMenu()">Travel</a>
-        <a href="#qa" onclick="closeMenu()">Q&amp;A</a>
-        <a href="#party" onclick="closeMenu()">Wedding Party</a>
-        <a href="#gifts" onclick="closeMenu()">Gifts</a>
-        <a href="#rsvp" onclick="closeMenu()">RSVP</a>
+        <a href="#welcome">Welcome</a>
+        <a href="#story">Story</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#travel">Travel</a>
+        <a href="#qa">Q&amp;A</a>
+        <a href="#party">Wedding Party</a>
+        <a href="#gifts">Gifts</a>
+        <a href="#rsvp">RSVP</a>
       </nav>
     </div>
   </div>
 
   <!-- HERO -->
-  <header class="hero" id="welcome">
-    <img src="https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/51ab2bdb401e5091c11f6028de45c317a0be1af1/bild1.jpg" alt="Sebbe and Ida" />
+  <header class="hero" id="welcome" aria-label="Hero slideshow">
+    <!-- Two layers for smooth crossfade -->
+    <img class="hero-slide is-active" id="slideA" alt="Wedding photo" decoding="async" fetchpriority="high">
+    <img class="hero-slide" id="slideB" alt="Wedding photo" decoding="async">
 
-    <div class="hero-progress" aria-hidden="true">
-      <span class="active"></span><span></span><span></span>
+    <div class="hero-controls" aria-label="Slideshow controls">
+      <button class="hero-btn" type="button" onclick="prevSlide()" aria-label="Previous photo">‹</button>
+      <button class="hero-btn" type="button" onclick="nextSlide()" aria-label="Next photo">›</button>
     </div>
+
+    <div class="hero-dots" id="dots" aria-label="Choose photo"></div>
   </header>
 
   <main class="wrap">
+
     <!-- WELCOME -->
     <section aria-label="Welcome">
       <h2>Welcome</h2>
@@ -390,9 +429,7 @@
           <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn burgundy" href="#schedule">View schedule</a>
             <a class="btn" target="_blank" rel="noopener"
-              href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu">
-              Open map
-            </a>
+              href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu">Open map</a>
           </p>
         </div>
 
@@ -423,7 +460,7 @@
         <div class="card">
           <h3>Dress code</h3>
           <p class="meta">We will be fancy, and hope you will dress up too!</p>
-          <p class="meta">Burgundy details are welcome (optional).</p>
+          <p class="meta">Burgundy / plum details are welcome (optional).</p>
         </div>
       </div>
     </section>
@@ -533,7 +570,7 @@
       </div>
     </section>
 
-    <!-- GIFTS (renamed from Registry) -->
+    <!-- GIFTS -->
     <section id="gifts">
       <h2>Gifts</h2>
       <p class="lede">A simple note, plus optional wishlist or honeymoon fund details.</p>
@@ -584,28 +621,106 @@
 
     <footer>
       <div class="wrap">
-        <div style="font-family:var(--display); font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:26px; color:var(--burgundy-deep); margin-bottom:10px;">
-          Sebbe <span style="font-family:var(--script); font-size:1.3em; font-weight:400; text-transform:none; letter-spacing:0;">&</span> Ida
+        <div style="font-family:var(--display); font-weight:600; letter-spacing:.10em; text-transform:uppercase; font-size:26px; color:var(--burgundy-deep); margin-bottom:10px;">
+          Sebbe <span style="font-family:var(--script); font-size:1.3em; font-weight:400; text-transform:none; letter-spacing:0;">&amp;</span> Ida
         </div>
         <div>September 5, 2026 · Gothenburg</div>
       </div>
     </footer>
+
   </main>
 
   <script>
-    function toggleMenu(){
-      const nav = document.getElementById('nav');
-      const btn = document.getElementById('menuBtn');
-      const isOpen = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    /* ===== HERO SLIDESHOW ===== */
+    const slides = [
+      "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild2.jpeg",
+      "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild3.jpeg",
+      "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild4.jpeg",
+      "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild5.jpeg",
+      "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild6.jpeg",
+      "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild7.jpeg"
+    ];
+
+    const intervalMs = 9000; // 5–10 seconds requested
+    let index = 0;
+    let timer = null;
+    let usingA = true;
+
+    const slideA = document.getElementById("slideA");
+    const slideB = document.getElementById("slideB");
+    const dotsEl = document.getElementById("dots");
+    const hero = document.getElementById("welcome");
+
+    function preload(urls){
+      urls.forEach(u => { const im = new Image(); im.src = u; });
     }
-    function closeMenu(){
-      const nav = document.getElementById('nav');
-      const btn = document.getElementById('menuBtn');
-      if(nav.classList.contains('open')){
-        nav.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-      }
+
+    function renderDots(){
+      dotsEl.innerHTML = "";
+      slides.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = (i === index) ? "active" : "";
+        b.setAttribute("aria-label", `Go to photo ${i + 1}`);
+        b.onclick = () => goTo(i);
+        dotsEl.appendChild(b);
+      });
+    }
+
+    function show(nextIndex){
+      index = (nextIndex + slides.length) % slides.length;
+
+      const incoming = usingA ? slideB : slideA;
+      const outgoing = usingA ? slideA : slideB;
+
+      incoming.src = slides[index];
+      incoming.classList.add("is-active");
+      outgoing.classList.remove("is-active");
+
+      usingA = !usingA;
+      renderDots();
+    }
+
+    function nextSlide(){ show(index + 1); restart(); }
+    function prevSlide(){ show(index - 1); restart(); }
+    function goTo(i){ show(i); restart(); }
+
+    function start(){
+      if(!slides.length) return;
+      preload(slides);
+      slideA.src = slides[0];
+      slideA.classList.add("is-active");
+      slideB.classList.remove("is-active");
+      index = 0;
+      renderDots();
+      timer = setInterval(() => show(index + 1), intervalMs);
+    }
+
+    function restart(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(() => show(index + 1), intervalMs);
+    }
+
+    function pause(){ if(timer) clearInterval(timer); timer = null; }
+    function resume(){ if(!timer) timer = setInterval(() => show(index + 1), intervalMs); }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      start();
+      hero.addEventListener("mouseenter", pause);
+      hero.addEventListener("mouseleave", resume);
+
+      document.addEventListener("visibilitychange", () => {
+        if(document.hidden) pause();
+        else resume();
+      });
+    });
+
+    /* ===== MOBILE MENU ===== */
+    function toggleMenu(){
+      const nav = document.getElementById("nav");
+      const btn = document.getElementById("menuBtn");
+      const isOpen = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     }
   </script>
 </body>
