@@ -5,24 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sebbe & Ida — Wedding · September 5, 2026</title>
   <meta name="description" content="Wedding website — details, schedule, travel, accommodation, and RSVP via email." />
+  <meta name="theme-color" content="#8A1F3D" />
 
-  <!-- Fonts: elegant script + modern sans -->
+  <!-- Fonts: elegant serif for brand + modern sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Italianno&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&family=Italianno&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Colors (modern, muted) */
-      --burgundy:#7A4D5B;      /* header bar like your example */
-      --burgundy-deep:#5C2F3C; /* accents */
-      --forest:#0F2A22;        /* dark green accents */
-      --paper:#FCFBF9;         /* background */
-      --ink:#111114;           /* primary text */
-      --muted:#5E5E66;         /* secondary text */
+      /* More vibrant palette */
+      --burgundy:#8A1F3D;
+      --burgundy-deep:#5A0F24;
+      --forest:#0A3D2E;
+      --paper:#FFFCF8;
+      --ink:#111114;
+      --muted:#4E4E57;
       --line:rgba(17,17,20,.10);
 
       /* Typography */
+      --display: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
       --script:"Italianno", cursive;
       --sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
 
@@ -30,6 +32,9 @@
       --max: 1080px;
       --pad: clamp(18px, 3vw, 28px);
       --radius: 18px;
+
+      /* Hero tuning (adjust this if needed!) */
+      --hero-pos-y: 32%;
     }
 
     *{box-sizing:border-box}
@@ -44,13 +49,22 @@
       text-rendering:optimizeLegibility;
     }
 
-    /* Top bar (simple, elegant, like reference) */
+    /* Better accessibility defaults */
+    a{ color: inherit; }
+    :focus-visible{
+      outline: 3px solid rgba(138,31,61,.35);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* Top bar */
     .topbar{
       background: var(--burgundy);
       color: #fff;
       position: sticky;
       top: 0;
       z-index: 50;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
     }
     .topbar-inner{
       max-width: var(--max);
@@ -62,13 +76,27 @@
       gap: 10px;
     }
 
+    /* Cleaner, more premium logo */
     .logo{
-      font-family: var(--script);
-      font-size: clamp(38px, 4.2vw, 56px);
-      line-height: 1;
-      letter-spacing: .02em;
+      font-family: var(--display);
+      font-size: clamp(28px, 3.2vw, 40px);
+      line-height: 1.05;
+      letter-spacing: .06em;
+      text-transform: uppercase;
       margin: 2px 0 0;
       user-select:none;
+      font-weight: 600;
+    }
+    .logo .amp{
+      font-family: var(--script);
+      font-weight: 400;
+      font-size: 1.2em;
+      letter-spacing: 0;
+      text-transform: none;
+      margin: 0 .2ch;
+      display:inline-block;
+      transform: translateY(2px);
+      opacity: .95;
     }
 
     .nav{
@@ -79,10 +107,10 @@
       font-size: 13px;
       letter-spacing: .10em;
       text-transform: uppercase;
-      opacity: .92;
+      opacity: .95;
     }
     .nav a{
-      color: rgba(255,255,255,.86);
+      color: rgba(255,255,255,.88);
       text-decoration:none;
       padding: 10px 6px;
       position:relative;
@@ -95,18 +123,18 @@
       right: 8px;
       bottom: 6px;
       height: 1px;
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.70);
       transform: scaleX(0);
       transform-origin:center;
       transition: transform .18s ease;
     }
     .nav a:hover:after{ transform: scaleX(1); }
 
-    /* Mobile: compress nav into button */
+    /* Mobile menu */
     .menuBtn{
       display:none;
       border: 1px solid rgba(255,255,255,.35);
-      background: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.12);
       color:#fff;
       padding: 10px 14px;
       border-radius: 999px;
@@ -119,33 +147,39 @@
       .nav{ display:none; width:100%; }
       .nav.open{ display:flex; }
       .menuBtn{ display:inline-flex; }
-      .topbar-inner{ padding-bottom: 6px; }
+      .topbar-inner{ padding-bottom: 10px; }
     }
 
     /* HERO */
     .hero{
       position:relative;
-      height: clamp(420px, 70vh, 720px);
+      height: clamp(360px, 62vh, 640px); /* slightly smaller */
       overflow:hidden;
       border-bottom: 1px solid var(--line);
+      background: #000;
     }
     .hero img{
       width:100%;
       height:100%;
       object-fit:cover;
+      object-position: 50% var(--hero-pos-y); /* key for “less zoomed on faces” */
       display:block;
-      transform: scale(1.02);
-      filter: saturate(1.03) contrast(1.02);
+      /* remove extra zoom, increase vibrance */
+      filter: saturate(1.18) contrast(1.06) brightness(1.03);
     }
     .hero:after{
       content:"";
       position:absolute; inset:0;
+      /* slightly richer tint */
       background:
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.05) 45%, rgba(0,0,0,.35));
+        linear-gradient(180deg,
+          rgba(0,0,0,.30),
+          rgba(138,31,61,.08) 45%,
+          rgba(0,0,0,.40)
+        );
       pointer-events:none;
     }
 
-    /* Minimal “progress” line like the example */
     .hero-progress{
       position:absolute;
       left:50%;
@@ -154,33 +188,31 @@
       display:flex;
       gap: 10px;
       z-index: 2;
-      opacity: .85;
+      opacity: .9;
     }
     .hero-progress span{
       width: 38px;
       height: 2px;
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.60);
       border-radius: 999px;
     }
     .hero-progress span.active{ background:#fff; }
 
-    /* Content wrapper */
     .wrap{
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 var(--pad);
     }
 
-    /* Section styling */
     section{
       padding: clamp(44px, 6vw, 84px) 0;
       border-bottom: 1px solid var(--line);
     }
     h2{
-      font-weight: 500;
-      letter-spacing: .08em;
+      font-weight: 600;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      font-size: 13px;
+      font-size: 12px;
       margin: 0 0 14px;
       color: var(--burgundy-deep);
     }
@@ -191,7 +223,6 @@
       font-size: 16px;
     }
 
-    /* Modern editorial grid */
     .grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -202,12 +233,12 @@
       .grid{ grid-template-columns: 1fr; }
     }
 
-    /* Cards */
     .card{
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 18px;
       background:#fff;
+      box-shadow: 0 10px 30px rgba(17,17,20,.04);
     }
     .card h3{
       margin: 0 0 8px;
@@ -220,7 +251,6 @@
       color: var(--muted);
     }
 
-    /* Schedule list */
     .schedule{
       display:grid;
       gap: 14px;
@@ -235,7 +265,7 @@
       background: #fff;
     }
     .time{
-      font-weight: 600;
+      font-weight: 700;
       color: var(--forest);
       letter-spacing:.02em;
     }
@@ -246,7 +276,6 @@
       .row{ grid-template-columns: 1fr; }
     }
 
-    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
@@ -259,8 +288,13 @@
       color: var(--ink);
       text-decoration:none;
       font-weight: 600;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     }
-    .btn:hover{ border-color: rgba(17,17,20,.25); }
+    .btn:hover{
+      border-color: rgba(17,17,20,.25);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(17,17,20,.06);
+    }
     .btn.primary{
       background: var(--forest);
       border-color: var(--forest);
@@ -272,17 +306,16 @@
       color:#fff;
     }
 
-    /* RSVP block */
     .rsvp{
-      background: linear-gradient(180deg, #fff, rgba(15,42,34,.02));
-      border: 1px solid rgba(15,42,34,.16);
+      background: linear-gradient(180deg, #fff, rgba(10,61,46,.03));
+      border: 1px solid rgba(10,61,46,.18);
       border-radius: var(--radius);
       padding: 18px;
     }
     code.inline{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      background: rgba(122,77,91,.10);
-      border: 1px solid rgba(122,77,91,.18);
+      background: rgba(138,31,61,.10);
+      border: 1px solid rgba(138,31,61,.20);
       padding: 6px 10px;
       border-radius: 12px;
       font-size: 13px;
@@ -294,15 +327,18 @@
     }
     ul.clean li{ margin: 6px 0; }
 
-    /* Footer */
     footer{
       padding: 34px 0 50px;
       color: var(--muted);
       text-align:center;
     }
 
-    /* Optional: switch to more green-forward theme by swapping accent */
-    /* body.green { --burgundy:#1F3A31; --burgundy-deep:#0F2A22; --accent: var(--forest); } */
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .btn, .nav a:after{ transition:none; }
+      .btn:hover{ transform:none; }
+    }
   </style>
 </head>
 
@@ -310,27 +346,27 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="topbar-inner">
-      <!-- Change names -->
-      <div class="logo">Sebbe &amp; Ida</div>
+      <div class="logo">Sebbe<span class="amp">&</span> Ida</div>
 
-      <button class="menuBtn" type="button" onclick="toggleMenu()">Menu</button>
+      <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" onclick="toggleMenu()">
+        Menu
+      </button>
 
       <nav id="nav" class="nav" aria-label="Primary">
-        <a href="#welcome">Welcome</a>
-        <a href="#story">Story</a>
-        <a href="#schedule">Schedule</a>
-        <a href="#travel">Travel</a>
-        <a href="#qa">Q&amp;A</a>
-        <a href="#party">Wedding Party</a>
-        <a href="#registry">Registry</a>
-        <a href="#rsvp">RSVP</a>
+        <a href="#welcome" onclick="closeMenu()">Welcome</a>
+        <a href="#story" onclick="closeMenu()">Story</a>
+        <a href="#schedule" onclick="closeMenu()">Schedule</a>
+        <a href="#travel" onclick="closeMenu()">Travel</a>
+        <a href="#qa" onclick="closeMenu()">Q&amp;A</a>
+        <a href="#party" onclick="closeMenu()">Wedding Party</a>
+        <a href="#gifts" onclick="closeMenu()">Gifts</a>
+        <a href="#rsvp" onclick="closeMenu()">RSVP</a>
       </nav>
     </div>
   </div>
 
   <!-- HERO -->
   <header class="hero" id="welcome">
-    <!-- Replace hero image -->
     <img src="https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/51ab2bdb401e5091c11f6028de45c317a0be1af1/bild1.jpg" alt="Sebbe and Ida" />
 
     <div class="hero-progress" aria-hidden="true">
@@ -339,7 +375,6 @@
   </header>
 
   <main class="wrap">
-
     <!-- WELCOME -->
     <section aria-label="Welcome">
       <h2>Welcome</h2>
@@ -350,13 +385,15 @@
 
       <div class="grid">
         <div class="card">
-          <h3>When & where</h3>
+          <h3>When &amp; where</h3>
           <p class="meta"><b>Saturday, September 5, 2026</b></p>
           <p class="meta">Quality Hotel Waterfront, Gothenburg</p>
           <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn burgundy" href="#schedule">View schedule</a>
             <a class="btn" target="_blank" rel="noopener"
-              href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu">Open map</a>
+              href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu">
+              Open map
+            </a>
           </p>
         </div>
 
@@ -374,15 +411,14 @@
     <!-- STORY -->
     <section id="story">
       <h2>Story</h2>
-      <p class="lede">
-        
-      </p>
+      <p class="lede"></p>
 
       <div class="grid">
         <div class="card">
           <h3>Our story (short)</h3>
           <p class="meta">
-            There once was a bar called Rockbaren, there both Ida and Sebbe spent many a night. Beers were had, songs were screamnt and something sparked...now we are here.
+            There once was a bar called Rockbaren, where both Ida and Sebbe spent many a night.
+            Beers were had, songs were screamed — and something sparked... now we are here.
           </p>
         </div>
         <div class="card">
@@ -402,7 +438,7 @@
         <div class="row">
           <div class="time">2:30 PM</div>
           <div>
-            <p class="what">Doors open & seating</p>
+            <p class="what">Doors open &amp; seating</p>
             <p class="note">Arrive, find your seat, and settle in.</p>
           </div>
         </div>
@@ -418,14 +454,14 @@
         <div class="row">
           <div class="time">4:00 PM → late</div>
           <div>
-            <p class="what">Dinner & celebration</p>
+            <p class="what">Dinner &amp; celebration</p>
             <p class="note">Dinner, cake, first dance — then party.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TRAVEL / ACCOMMODATION -->
+    <!-- TRAVEL -->
     <section id="travel">
       <h2>Travel</h2>
       <p class="lede">Everything practical: getting there, parking, and where to stay.</p>
@@ -448,9 +484,6 @@
             </a>
             <a class="btn" href="#rsvp">RSVP first</a>
           </p>
-          <p class="meta" style="margin-top:10px;">
-            Official booking page via Strawberry. [1](https://www.figma.com/community/file/1444403153564554145/luxevow-wedding-invitation-landing-page-with-rsvp)
-          </p>
         </div>
 
         <div class="card">
@@ -466,7 +499,7 @@
     <!-- Q&A -->
     <section id="qa">
       <h2>Q&amp;A</h2>
-      <p class="lede">Quick answers to common questions (super modern and helpful).</p>
+      <p class="lede">Quick answers to common questions.</p>
 
       <div class="grid">
         <div class="card">
@@ -501,10 +534,10 @@
       </div>
     </section>
 
-    <!-- REGISTRY -->
-    <section id="registry">
-      <h2>Registry</h2>
-      <p class="lede">Minimal, non-tacky copy: “Your presence is enough” + optional wishlist link.</p>
+    <!-- GIFTS (renamed from Registry) -->
+    <section id="gifts">
+      <h2>Gifts</h2>
+      <p class="lede">A simple note, plus optional wishlist or honeymoon fund details.</p>
 
       <div class="grid">
         <div class="card">
@@ -530,7 +563,6 @@
       <p class="lede">RSVP is by email only. Please include diet/allergies and any important needs.</p>
 
       <div class="rsvp">
-        <!-- CHANGE THIS EMAIL -->
         <p class="meta">Email us at: <code class="inline">rsvp@example.com</code></p>
 
         <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
@@ -553,19 +585,28 @@
 
     <footer>
       <div class="wrap">
-        <div style="font-family:var(--script); font-size:40px; color:var(--burgundy-deep); margin-bottom:10px;">
-          Sebbe &amp; Ida
+        <div style="font-family:var(--display); font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:26px; color:var(--burgundy-deep); margin-bottom:10px;">
+          Sebbe <span style="font-family:var(--script); font-size:1.3em; font-weight:400; text-transform:none; letter-spacing:0;">&</span> Ida
         </div>
         <div>September 5, 2026 · Gothenburg</div>
       </div>
     </footer>
-
   </main>
 
   <script>
     function toggleMenu(){
       const nav = document.getElementById('nav');
-      nav.classList.toggle('open');
+      const btn = document.getElementById('menuBtn');
+      const isOpen = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    function closeMenu(){
+      const nav = document.getElementById('nav');
+      const btn = document.getElementById('menuBtn');
+      if(nav.classList.contains('open')){
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
     }
   </script>
 </body>
