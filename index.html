@@ -335,7 +335,12 @@
     @media (max-width: 560px){
       .row{ grid-template-columns: 1fr; }
     }
-
+    
+        .btn.green{
+      background: var(--forest);
+      border-color: var(--forest);
+      color:#fff;
+    }
     /* Buttons */
     .btn{
       display:inline-flex;
@@ -625,24 +630,58 @@
 
     <!-- WEDDING PARTY -->
     <section id="party">
-      <h2>Wedding Party</h2>
-      <p class="lede">Add toastmasters / key contacts here. Keep it clean and minimal.</p>
+      <h2>Toastmasters</h2>
+      <p class="lede">
+        Queens. Bosses. We have chosen the best of the best. What they say goes.
+      </p>
 
       <div class="grid">
         <div class="card">
           <h3>Toastmaster</h3>
-          <p class="meta"><b>Name Surname</b></p>
+          <p class="meta"><b>Marie Johansson</b></p>
           <p class="meta">Phone: +46 70‑000 00 00</p>
-          <p class="meta">Email: name@example.com</p>
+
+          <p class="meta" style="margin-top:10px;">
+            <span class="mail-chip"></span>
+          </p>
+
+          <div class="about-box">
+            <b>About Marie</b><br>
+            Warm, sharp, and wonderfully in control - Marie will keep the flow smooth and the energy high. Ida's former boss, so she's gotta be good to keep Ida in check.
+          </div>
         </div>
+
         <div class="card">
           <h3>Toastmaster</h3>
-          <p class="meta"><b>Name Surname</b></p>
+          <p class="meta"><b>Josefin Daleberg</b></p>
           <p class="meta">Phone: +46 70‑000 00 00</p>
-          <p class="meta">Email: name@example.com</p>
+
+          <p class="meta" style="margin-top:10px;">
+            <span class="mail-chip">toastmaster@wirmark.se</span>
+          </p>
+
+          <div class="about-box">
+            <b>About Josefin</b><br>
+            Effortlessly charming and brilliantly organized - Josefin makes sure everything runs on time.  
+          </div>
         </div>
       </div>
-    </section>
+
+      <div class="card toast-contact">
+        <h3>Contact the toastmasters</h3>
+        <p class="meta">
+          If you’d like to give a speech, plan a surprise, or have any questions, please email our toastmasters:
+        </p>
+
+        <p class="btn-row">
+          <a class="btn green" href="mailto:toastmaster@wirmark.se?subject=Wedding%20Toastmasters%20%E2%80%94%20Sebbe%20%26%20Ida">
+            Email toastmasters
+          </a>
+          <span class="mail-chip">toastmaster@wirmark.se</span>
+        </p>
+      </div>
+      
+</section>
 
     <!-- GIFTS -->
     <section id="gifts">
