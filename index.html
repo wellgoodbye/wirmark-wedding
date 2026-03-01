@@ -35,10 +35,10 @@
       --pad: clamp(18px, 3vw, 28px);
       --radius: 18px;
 
-      /* HERO controls */
+      /* HERO */
       --hero-height: clamp(420px, 70vh, 760px);
-      --hero-zoom: 1.12;         /* increase for more zoom (e.g. 1.08–1.20) */
-      --hero-pos: 50% 42%;       /* move focal point if needed */
+      --hero-pos: 50% 50%;
+      --hero-inset: clamp(10px, 2.2vw, 26px); /* makes image feel "less zoomed" without adding a border */
     }
 
     *{box-sizing:border-box}
@@ -149,42 +149,52 @@
       .topbar-inner{ padding-bottom: 10px; }
     }
 
-    /* HERO — clean, no frame */
+    /* HERO — Alternative #2 (NOT zoomed): contain + no transform + soft inset */
     .hero{
       position:relative;
       height: var(--hero-height);
       overflow:hidden;
       border-bottom: 1px solid var(--line);
-      background: #000;
+
+      /* elegant backdrop so "contain" looks intentional, no border/frame */
+      background:
+        radial-gradient(1200px 520px at 50% 25%,
+          rgba(122,63,83,.22),
+          rgba(106,75,107,.10) 55%,
+          rgba(0,0,0,.45) 100%);
     }
+
     .hero-slide{
       position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit: cover;             /* more zoomed feeling */
+      inset: var(--hero-inset);    /* creates breathing room without any border */
+      width:auto;
+      height:auto;
+
+      /* scale image to fit inside available space */
+      max-width: calc(100% - (var(--hero-inset) * 2));
+      max-height: calc(100% - (var(--hero-inset) * 2));
+
+      margin:auto;
+      object-fit: contain;          /* KEY */
       object-position: var(--hero-pos);
-      transform: scale(var(--hero-zoom));
-      transform-origin: center;
       display:block;
       opacity:0;
       transition: opacity 900ms ease;
 
-      /* gentle grading (not too punchy) */
-      filter: saturate(1.06) contrast(1.05) brightness(1.03);
+      filter: saturate(1.05) contrast(1.05) brightness(1.03);
+      transform: none;              /* IMPORTANT: no extra zoom */
     }
     .hero-slide.is-active{ opacity:1; }
 
-    /* Subtle overlay to tie it to burgundy/plum */
     .hero:after{
       content:"";
       position:absolute; inset:0;
       pointer-events:none;
       background:
         linear-gradient(180deg,
-          rgba(0,0,0,.22),
+          rgba(0,0,0,.18),
           rgba(122,63,83,.08) 45%,
-          rgba(0,0,0,.30));
+          rgba(0,0,0,.26));
     }
 
     /* Controls */
@@ -399,7 +409,6 @@
 
   <!-- HERO -->
   <header class="hero" id="welcome" aria-label="Hero slideshow">
-    <!-- Two layers for smooth crossfade -->
     <img class="hero-slide is-active" id="slideA" alt="Wedding photo" decoding="async" fetchpriority="high">
     <img class="hero-slide" id="slideB" alt="Wedding photo" decoding="async">
 
@@ -641,7 +650,7 @@
       "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild7.jpeg"
     ];
 
-    const intervalMs = 9000; // 5–10 seconds requested
+    const intervalMs = 9000; // 5–10 seconds
     let index = 0;
     let timer = null;
     let usingA = true;
