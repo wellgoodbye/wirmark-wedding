@@ -38,7 +38,7 @@
       /* HERO */
       --hero-height: clamp(420px, 70vh, 760px);
       --hero-pos: 50% 50%;
-      --hero-inset: clamp(10px, 2.2vw, 26px); /* makes image feel "less zoomed" without adding a border */
+      --hero-inset: clamp(14px, 2.6vw, 40px); /* increase for even less "zoom" */
     }
 
     *{box-sizing:border-box}
@@ -65,7 +65,6 @@
       position: sticky;
       top:0;
       z-index:50;
-      box-shadow: 0 10px 30px rgba(0,0,0,.12);
     }
     .topbar-inner{
       max-width: var(--max);
@@ -149,53 +148,36 @@
       .topbar-inner{ padding-bottom: 10px; }
     }
 
-    /* HERO — Alternative #2 (NOT zoomed): contain + no transform + soft inset */
+    /* HERO — same background as topbar (NO grey layers) */
     .hero{
       position:relative;
       height: var(--hero-height);
       overflow:hidden;
       border-bottom: 1px solid var(--line);
-
-      /* elegant backdrop so "contain" looks intentional, no border/frame */
-      background:
-        radial-gradient(1200px 520px at 50% 25%,
-          rgba(122,63,83,.22),
-          rgba(106,75,107,.10) 55%,
-          rgba(0,0,0,.45) 100%);
+      background: var(--burgundy); /* EXACT match */
     }
 
+    /* Alternative #2: show more of the image (not zoomed) */
     .hero-slide{
       position:absolute;
-      inset: var(--hero-inset);    /* creates breathing room without any border */
+      inset: var(--hero-inset);
       width:auto;
       height:auto;
-
-      /* scale image to fit inside available space */
       max-width: calc(100% - (var(--hero-inset) * 2));
       max-height: calc(100% - (var(--hero-inset) * 2));
-
       margin:auto;
-      object-fit: contain;          /* KEY */
+
+      object-fit: contain;
       object-position: var(--hero-pos);
       display:block;
+
       opacity:0;
       transition: opacity 900ms ease;
 
       filter: saturate(1.05) contrast(1.05) brightness(1.03);
-      transform: none;              /* IMPORTANT: no extra zoom */
+      transform: none; /* IMPORTANT: no zoom */
     }
     .hero-slide.is-active{ opacity:1; }
-
-    .hero:after{
-      content:"";
-      position:absolute; inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg,
-          rgba(0,0,0,.18),
-          rgba(122,63,83,.08) 45%,
-          rgba(0,0,0,.26));
-    }
 
     /* Controls */
     .hero-controls{
@@ -524,7 +506,7 @@
           </ul>
           <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn primary" target="_blank" rel="noopener"
-               href="https://www.strawberryhotels.com/hotels/sweden/gothenburg/quality-hotel-waterfront/">
+              href="https://www.strawberryhotels.com/hotels/sweden/gothenburg/quality-hotel-waterfront/">
               Book a room (official)
             </a>
             <a class="btn" href="#rsvp">RSVP first</a>
@@ -612,7 +594,7 @@
 
         <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
           <a class="btn burgundy"
-             href="mailto:rsvp@example.com?subject=RSVP%20%E2%80%94%20Sebbe%20%26%20Ida&body=Name%3A%0AAttending%20(accept%2Fdecline)%3A%0ANumber%20of%20guests%3A%0ADietary%20requirements%20%2F%20allergies%3A%0AOther%20important%20info%3A%0A">
+             href="mailto:rsvp@example.com?subject=RSVP%20%E2%80%94%20Sebbe%20%26%20Ida&amp;body=Name%3A%0AAttending%20(accept%2Fdecline)%3A%0ANumber%20of%20guests%3A%0ADietary%20requirements%20%2F%20allergies%3A%0AOther%20important%20info%3A%0A">
             Send RSVP email (template)
           </a>
         </p>
@@ -650,7 +632,7 @@
       "https://raw.githubusercontent.com/wellgoodbye/wirmark-wedding/refs/heads/main/bild7.jpeg"
     ];
 
-    const intervalMs = 9000; // 5–10 seconds
+    const intervalMs = 9000;
     let index = 0;
     let timer = null;
     let usingA = true;
@@ -724,7 +706,6 @@
       });
     });
 
-    /* ===== MOBILE MENU ===== */
     function toggleMenu(){
       const nav = document.getElementById("nav");
       const btn = document.getElementById("menuBtn");
