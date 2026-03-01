@@ -38,7 +38,7 @@
       /* HERO */
       --hero-height: clamp(420px, 70vh, 760px);
       --hero-pos: 50% 50%;
-      --hero-inset: clamp(14px, 2.6vw, 40px); /* increase for even less "zoom" */
+      --hero-inset: clamp(14px, 2.6vw, 40px);
     }
 
     *{box-sizing:border-box}
@@ -52,8 +52,7 @@
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
 
-      text-align: center; /* <-- NYTT: centrerar all text som standard */
-
+      text-align: center; /* centrerar all text */
     }
     :focus-visible{
       outline: 3px solid rgba(122,63,83,.28);
@@ -151,16 +150,14 @@
       .topbar-inner{ padding-bottom: 10px; }
     }
 
-    /* HERO — same background as topbar (NO grey layers) */
+    /* HERO */
     .hero{
       position:relative;
       height: var(--hero-height);
       overflow:hidden;
       border-bottom: 1px solid var(--line);
-      background: var(--burgundy); /* EXACT match */
+      background: var(--burgundy);
     }
-
-    /* Alternative #2: show more of the image (not zoomed) */
     .hero-slide{
       position:absolute;
       inset: var(--hero-inset);
@@ -169,20 +166,16 @@
       max-width: calc(100% - (var(--hero-inset) * 2));
       max-height: calc(100% - (var(--hero-inset) * 2));
       margin:auto;
-
       object-fit: contain;
       object-position: var(--hero-pos);
       display:block;
-
       opacity:0;
       transition: opacity 900ms ease;
-
       filter: saturate(1.05) contrast(1.05) brightness(1.03);
-      transform: none; /* IMPORTANT: no zoom */
+      transform: none;
     }
     .hero-slide.is-active{ opacity:1; }
 
-    /* Controls */
     .hero-controls{
       position:absolute;
       inset:0;
@@ -280,6 +273,17 @@
     }
     .meta{ margin:0; color: var(--muted); }
 
+    /* ✅ NYTT: gemensam rad för knappar som ligger i flex */
+    .btn-row{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;  /* <-- gör att vinröda + andra knappar hamnar i mitten */
+      align-items:center;
+      width:100%;
+    }
+
     /* Schedule list */
     .schedule{ display:grid; gap: 14px; }
     .row{
@@ -290,10 +294,8 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: #fff;
-      
-     text-align: center;     
-     justify-items: center;
-
+      text-align: center;
+      justify-items: center;
     }
     .time{
       font-weight: 700;
@@ -426,7 +428,9 @@
           <h3>When &amp; where</h3>
           <p class="meta"><b>Saturday, September 5, 2026</b></p>
           <p class="meta">Quality Hotel Waterfront, Gothenburg</p>
-          <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+
+          <!-- ✅ ÄNDRAD: var inline-flex, nu btn-row (centrerar knapparna) -->
+          <p class="btn-row">
             <a class="btn burgundy" href="#schedule">View schedule</a>
             <a class="btn" target="_blank" rel="noopener"
               href="https://www.google.com/maps/place/Quality+Hotel+Waterfront/@57.6905749,11.9051454,16z/data=!3m2!4b1!5s0x464f8ccc6bb6005f:0x16bc9175ba9b94ef!4m9!3m8!1s0x464f8ccc61184735:0xb76fba0bbda34a8b!5m2!4m1!1i2!8m2!3d57.6905721!4d11.9077203!16s%2Fg%2F1tz6__pl?entry=ttu">Open map</a>
@@ -513,7 +517,9 @@
             <li>Family Room</li>
             <li>Compact Double</li>
           </ul>
-          <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+
+          <!-- ✅ ÄNDRAD: var inline-flex, nu btn-row -->
+          <p class="btn-row">
             <a class="btn primary" target="_blank" rel="noopener"
               href="https://www.strawberryhotels.com/hotels/sweden/gothenburg/quality-hotel-waterfront/">
               Book a room (official)
@@ -601,7 +607,8 @@
       <div class="rsvp">
         <p class="meta">Email us at: <code class="inline">rsvp@example.com</code></p>
 
-        <p style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <!-- ✅ ÄNDRAD: var inline-flex, nu btn-row -->
+        <p class="btn-row">
           <a class="btn burgundy"
              href="mailto:rsvp@example.com?subject=RSVP%20%E2%80%94%20Sebbe%20%26%20Ida&amp;body=Name%3A%0AAttending%20(accept%2Fdecline)%3A%0ANumber%20of%20guests%3A%0ADietary%20requirements%20%2F%20allergies%3A%0AOther%20important%20info%3A%0A">
             Send RSVP email (template)
